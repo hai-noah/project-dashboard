@@ -55,7 +55,7 @@ const packageData: PackageNavigation[] = [
   },
 ];
 
-const CompanyAddForm = () => {
+const CompanyAddForm1 = () => {
 
   const [internal, setInternal] = useState(false);
   const [success, setSuccess] = useState(false);
@@ -293,4 +293,4 @@ const CompanyAddForm = () => {
   );
 };
 
-export default CompanyAddForm;
+export default CompanyAddForm1;

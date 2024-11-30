@@ -1,7 +1,7 @@
 import React from "react";
 import { Metadata } from "next";
 import DefaultLayout from "@/components/Layouts/DefaultLaout";
-import CompanyAddForm from "@/components/Form/Company-Form/Add";
+import CompanyAddForm from "@/components/Form/Company-form/Add";
 
 export const metadata: Metadata = {
   title: "Next.js Form Elements Page | NextAdmin - Next.js Dashboard Kit",

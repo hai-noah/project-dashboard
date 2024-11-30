@@ -35,13 +35,13 @@ const mySchema = z.object({
   email_id: z.string().trim().min(1, { message: "Email_id is required." }),
   contactNumber: z.string().trim().min(1, { message: "Contact Number is required." }),
   websiteURL: z.string().trim().min(1, { message: "Website URL is required." }),
-  establishedYear: z.string().trim().min(1, { message: "Year is required." }),
+  // establishedYear: z.string().trim().min(1, { message: "Year is required." }),
   country: z.string().trim().min(1, { message: "Counrty is required." }),
-  brandDescription: z.string().trim(),
-  companyLogo: z.any().refine((file) => file?.size <= MAX_FILE_SIZE, 'Max image size is 5MB.')
-    .refine(
-      (file) => ACCEPTED_IMAGE_TYPES.includes(file?.type),
-      "Only .jpg, .jpeg, .png and .webp formats are supported."),
+  companyLogo:z.any(),
+  // companyLogo: z.any().refine((file) => file?.size <= MAX_FILE_SIZE, 'Max image size is 5MB.')
+  //   .refine(
+  //     (file) => ACCEPTED_IMAGE_TYPES.includes(file?.type),
+  //     "Only .jpg, .jpeg, .png and .webp formats are supported."),
 });
 const MAX_FILE_SIZE = 5000000;
 const ACCEPTED_IMAGE_TYPES = ["image/jpeg", "image/jpg", "image/png", "image/webp"];
@@ -63,23 +63,10 @@ const navigationData: PackageNavigation[] = [
   },
 ];
 
-const BrandForm = () => {
+const CompanyAddForm = () => {
 
-  const [internal, setInternal] = useState(false);
-  const [success, setSuccess] = useState(false);
 
   const router = useRouter();
-
-  //     const [tasks, setTask] = useState([])
-  //   const [input, setInput] = useState()
-
-  //   function click() {
-  //     if (input) {
-  //       let array = [...tasks, input];
-  //       setTask(array);
-  //       setInput();
-  //     }
-  //   }
 
   const {
     register,
@@ -87,9 +74,11 @@ const BrandForm = () => {
     control,
     formState: { errors, isSubmitting },
   } = useForm<TMySchema>({ resolver: zodResolver(mySchema) });
+  console.log(errors)
 
   const submitData = async (data: any) => {
     try {
+      console.log('data::', data)
       // const formData = serialize(data)
       // const response = await brandApi.createBrand(formData);
 
@@ -99,7 +88,7 @@ const BrandForm = () => {
       //   router.push("/tables/brands");
       // }
       toast.success('Company Added Successfully.')
-      router.push("/tables/company");
+      router.push("/companies");
     } catch (error: any) {
       if (error.response.status == 404) {
         toast.error(error.message)
@@ -310,4 +299,4 @@ const BrandForm = () => {
   );
 };
 
-export default BrandForm;
+export default CompanyAddForm;

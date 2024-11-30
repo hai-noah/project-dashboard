@@ -35,15 +35,15 @@ const mySchema = z.object({
   email_id: z.string().trim().min(1, { message: "Email_id is required." }),
   contactNumber: z.string().trim().min(1, { message: "contact Number is required." }),
   websiteURL: z.string().trim().min(1, { message: "Website URL is required." }),
-  establishedYear: z.string().trim().min(1, { message: "Year is required." }),
+  // establishedYear: z.string().trim().min(1, { message: "Year is required." }),
   accreditationStatus: z.string().trim().min(1, { message: "Status is required." }),
   country: z.string().trim().min(1, { message: "Counrty is required." }),
   deanDirectorName: z.string().trim().min(1, { message: "Name is required." }),
-  universityDescription: z.string().trim(),
-  universityLogo: z.any().refine((file) => file?.size <= MAX_FILE_SIZE, 'Max image size is 5MB.')
-    .refine(
-      (file) => ACCEPTED_IMAGE_TYPES.includes(file?.type),
-      "Only .jpg, .jpeg, .png and .webp formats are supported."),
+  universityLogo: z.any()
+  // universityLogo: z.any().refine((file) => file?.size <= MAX_FILE_SIZE, 'Max image size is 5MB.')
+  //   .refine(
+  //     (file) => ACCEPTED_IMAGE_TYPES.includes(file?.type),
+  //     "Only .jpg, .jpeg, .png and .webp formats are supported."),
 });
 const MAX_FILE_SIZE = 5000000;
 const ACCEPTED_IMAGE_TYPES = ["image/jpeg", "image/jpg", "image/png", "image/webp"];
@@ -92,6 +92,7 @@ const UniversityAddForm = () => {
 
   const submitData = async (data: any) => {
     try {
+      console.log('data::', data)
       // const formData = serialize(data)
       // const response = await brandApi.createBrand(formData);
 
@@ -101,7 +102,7 @@ const UniversityAddForm = () => {
       //   router.push("/tables/brands");
       // }
       toast.success('University Added Successfully.')
-      router.push("/tables/university");
+      router.push("/universities");
     } catch (error: any) {
       if (error.response.status == 404) {
         toast.error(error.message)

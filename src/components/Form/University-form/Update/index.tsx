@@ -56,7 +56,7 @@ const navigationData: PackageNavigation[] = [
   },
 ];
 
-const BrandEditForm = () => {
+const UniversityEditForm = () => {
 
   const [internal, setInternal] = useState(false);
   const [success, setSuccess] = useState(false);
@@ -332,4 +332,4 @@ const BrandEditForm = () => {
   );
 };
 
-export default BrandEditForm;
+export default UniversityEditForm;
