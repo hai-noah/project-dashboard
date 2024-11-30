@@ -105,7 +105,7 @@ const CompanyTable = ({ listOfBrands }: Props) => {
                     <th className="min-w-[150px] px-4 py-4 font-medium text-dark dark:text-white">
                     Company ID
                     </th>
-                    <th className="min-w-[220px] px-4 py-4 font-medium text-dark dark:text-white">
+                    <th className="min-w-[150px] px-4 py-4 font-medium text-dark dark:text-white">
                       Company Name
                     </th>
                     <th className="min-w-[150px] px-4 py-4 font-medium text-dark dark:text-white">
