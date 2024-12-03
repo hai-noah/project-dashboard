@@ -35,7 +35,7 @@ const mySchema = z.object({
   email_id: z.string().trim().min(1, { message: "Email_id is required." }),
   contactNumber: z.string().trim().min(1, { message: "contact Number is required." }),
   websiteURL: z.string().trim().min(1, { message: "Website URL is required." }),
-  // establishedYear: z.string().trim().min(1, { message: "Year is required." }),
+  establishedYear: z.string().trim().min(1, { message: "Year is required." }),
   accreditationStatus: z.string().trim().min(1, { message: "Status is required." }),
   country: z.string().trim().min(1, { message: "Counrty is required." }),
   deanDirectorName: z.string().trim().min(1, { message: "Name is required." }),

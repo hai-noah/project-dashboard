@@ -35,7 +35,7 @@ const mySchema = z.object({
   email_id: z.string().trim().min(1, { message: "Email_id is required." }),
   contactNumber: z.string().trim().min(1, { message: "Contact Number is required." }),
   websiteURL: z.string().trim().min(1, { message: "Website URL is required." }),
-  // establishedYear: z.string().trim().min(1, { message: "Year is required." }),
+  establishedYear: z.string().trim().min(1, { message: "Year is required." }),
   country: z.string().trim().min(1, { message: "Counrty is required." }),
   companyLogo:z.any(),
   // companyLogo: z.any().refine((file) => file?.size <= MAX_FILE_SIZE, 'Max image size is 5MB.')
@@ -240,7 +240,7 @@ const CompanyAddForm = () => {
                     <Typography variant='text-body-sm' fontWeight={500} color="textPrimary" sx={{ mb: 2.5 }}>
                       Company Logo
                       {!!errors.companyLogo && (
-                        <span style={{ color: 'red', fontSize: '14px', position: 'absolute', right: '65px' }}>Invalid Image format {!!errors.brandLogo}</span>
+                        <span style={{ color: 'red', fontSize: '14px', position: 'absolute', right: '65px' }}>Invalid Image format {!!errors.companyLogo}</span>
                       )}
                     </Typography>
                     <Controller
@@ -249,7 +249,7 @@ const CompanyAddForm = () => {
                       defaultValue=''
                       render={({ field }) => (
                         <div>
-                          <FileUploaderSingle file={field.value} setFile={field.onChange} error={errors.brandLogo} />
+                          <FileUploaderSingle file={field.value} setFile={field.onChange} error={errors.companyLogo} />
                         </div>
                       )}
                     />

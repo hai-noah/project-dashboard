@@ -29,19 +29,23 @@ import { PackageNavigation } from "@/types/packageNavigation";
 import SelectDropdown from "@/components/FormElements/SelectGroup/SelectDropdownForProduct";
 
 const mySchema = z.object({
-  companyId: z.string().trim().min(1, { message: "Company Id is required." }),
-  companyName: z.string().trim().min(1, { message: "Company Name is required." }),
-  address: z.string().trim().min(1, { message: "Address is required." }),
-  email_id: z.string().trim().min(1, { message: "Email_id is required." }),
-  contactNumber: z.string().trim().min(1, { message: "Contact Number is required." }),
-  websiteURL: z.string().trim().min(1, { message: "Website URL is required." }),
-  establishedYear: z.string().trim().min(1, { message: "Year is required." }),
-  country: z.string().trim().min(1, { message: "Counrty is required." }),
-  brandDescription: z.string().trim(),
-  companyLogo: z.any().refine((file) => file?.size <= MAX_FILE_SIZE, 'Max image size is 5MB.')
-    .refine(
-      (file) => ACCEPTED_IMAGE_TYPES.includes(file?.type),
-      "Only .jpg, .jpeg, .png and .webp formats are supported."),
+  certificateNumber: z.string().trim().min(1, { message: "Certificate Number is required." }),
+  studentId: z.string().trim().min(1, { message: "Student ID is required." }),
+  studentName: z.string().trim().min(1, { message: "Student Name is required." }),
+  issueDate: z.string().trim().min(1, { message: "Issue Date is required." }), 
+  collegeName: z.string().trim().min(1, { message: "College Name is required." }), 
+  universityName: z.string().trim().min(1, { message: "University Name is required." }),
+  courseDuration: z.string().trim().min(1, { message: "Course Duration is required." }), 
+  affiliationNumber: z.string().trim().min(1, { message: "Affiliation Number is required." }),
+  universityLogo: z.any(),
+  
+  // establishedYear: z.string().trim().min(1, { message: "Year is required." }),
+  // country: z.string().trim().min(1, { message: "Counrty is required." }),
+  // companyLogo:z.any(),
+  // companyLogo: z.any().refine((file) => file?.size <= MAX_FILE_SIZE, 'Max image size is 5MB.')
+  //   .refine(
+  //     (file) => ACCEPTED_IMAGE_TYPES.includes(file?.type),
+  //     "Only .jpg, .jpeg, .png and .webp formats are supported."),
 });
 const MAX_FILE_SIZE = 5000000;
 const ACCEPTED_IMAGE_TYPES = ["image/jpeg", "image/jpg", "image/png", "image/webp"];
@@ -54,8 +58,8 @@ const navigationData: PackageNavigation[] = [
     link: '/'
   },
   {
-    name: 'Companies / ',
-    link: '/companies'
+    name: 'Certificates / ',
+    link: '/certificate'
   },
   {
     name: 'Add ',
@@ -63,23 +67,10 @@ const navigationData: PackageNavigation[] = [
   },
 ];
 
-const CompanyEditForm = () => {
+const CertificateAddForm = () => {
 
-  const [internal, setInternal] = useState(false);
-  const [success, setSuccess] = useState(false);
 
   const router = useRouter();
-
-  //     const [tasks, setTask] = useState([])
-  //   const [input, setInput] = useState()
-
-  //   function click() {
-  //     if (input) {
-  //       let array = [...tasks, input];
-  //       setTask(array);
-  //       setInput();
-  //     }
-  //   }
 
   const {
     register,
@@ -87,9 +78,11 @@ const CompanyEditForm = () => {
     control,
     formState: { errors, isSubmitting },
   } = useForm<TMySchema>({ resolver: zodResolver(mySchema) });
+  console.log(errors)
 
   const submitData = async (data: any) => {
     try {
+      console.log('data::', data)
       // const formData = serialize(data)
       // const response = await brandApi.createBrand(formData);
 
@@ -98,8 +91,8 @@ const CompanyEditForm = () => {
       //   toast.success('Brand Added Successfully.')
       //   router.push("/tables/brands");
       // }
-      toast.success('Company Added Successfully.')
-      router.push("/tables/company");
+      toast.success('Certificat Added Successfully.')
+      router.push("/certificate");
     } catch (error: any) {
       if (error.response.status == 404) {
         toast.error(error.message)
@@ -110,7 +103,7 @@ const CompanyEditForm = () => {
   return (
     <>
 
-      <Breadcrumb pageName="EDIT COMPANY" navigation={navigationData} />
+      <Breadcrumb pageName="ADD CERTIFICATE" navigation={navigationData} />
       <div className="gap-9 sm:grid-cols-2">
 
         <form onSubmit={handleSubmit(submitData)}>
@@ -119,164 +112,171 @@ const CompanyEditForm = () => {
             <div className="rounded-[10px] border border-stroke bg-white shadow-1 dark:border-dark-3 dark:bg-gray-dark dark:shadow-card">
               <div className="border-b border-stroke px-6.5 py-4 dark:border-dark-3">
                 <h3 className="font-medium text-dark dark:text-white">
-                  Add Company
+                  Add Certificate
                 </h3>
               </div>
               <div className="flex flex-col gap-5.5 p-6.5">
                 <div>
                   <label className="mb-3 block text-body-sm font-medium text-dark dark:text-white">
-                    Company Id
+                    Certificate Number
                   </label>
                   <input
-                    {...register("companyId")}
+                    {...register("certificateNumber")}
                     type="text"
-                    placeholder="Company Id"
+                    placeholder="Certificate Number"
                     className="w-full rounded-[7px] border-[1.5px] border-stroke bg-transparent px-5.5 py-3 text-dark outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-gray-2 dark:border-dark-3 dark:bg-dark-2 dark:text-white dark:focus:border-primary"
                   />
-                  {errors.companyId && (
+                  {errors.certificateNumber && (
                     <p className="text-sm text-red-600">
-                      {errors.companyId.message}
+                      {errors.certificateNumber.message}
                     </p>
                   )}
                 </div>
 
                 <div>
                   <label className="mb-3 block text-body-sm font-medium text-dark dark:text-white">
-                    Company Name
+                    Student Id
                   </label>
                   <input
-                    {...register("companyName")}
+                    {...register("studentId")}
                     type="text"
-                    placeholder="Company Name"
+                    placeholder="Student Id"
                     className="w-full rounded-[7px] border-[1.5px] border-stroke bg-transparent px-5.5 py-3 text-dark outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-gray-2 dark:border-dark-3 dark:bg-dark-2 dark:text-white dark:focus:border-primary"
                   />
-                  {errors.companyName && (
+                  {errors.studentId && (
                     <p className="text-sm text-red-600">
-                      {errors.companyName.message}
+                      {errors.studentId.message}
                     </p>
                   )}
                 </div>
 
                 <div>
                   <label className="mb-3 block text-body-sm font-medium text-dark dark:text-white">
-                    Address
+                    Student Name
                   </label>
                   <textarea
-                    {...register("address")}
+                    {...register("studentName")}
                     rows={6}
-                    placeholder="Address"
+                    placeholder="Student Name"
                     className="w-full rounded-[7px] border-[1.5px] border-stroke bg-transparent px-5.5 py-3 text-dark outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-gray-2 dark:border-dark-3 dark:bg-dark-2 dark:text-white dark:focus:border-primary"
                   ></textarea>
-                  {errors.address && (
+                  {errors.studentName && (
                     <p className="text-sm text-red-600">
-                      {errors.address.message}
+                      {errors.studentName.message}
                     </p>
                   )}
                 </div>
 
 
+               
                 <div>
                   <label className="mb-3 block text-body-sm font-medium text-dark dark:text-white">
-                    Email-Id
-                  </label>
-                  <input
-                    {...register("email_id")}
-                    type="email"
-                    placeholder="Email_id"
-                    className="w-full rounded-[7px] border-[1.5px] border-stroke bg-transparent px-5.5 py-3 text-dark outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-gray-2 dark:border-dark-3 dark:bg-dark-2 dark:text-white dark:focus:border-primary"
-                  />
-                  {errors.email_id && (
-                    <p className="text-sm text-red-600">
-                      {errors.email_id.message}
-                    </p>
-                  )}
-                </div>
-
-                <div>
-                  <label className="mb-3 block text-body-sm font-medium text-dark dark:text-white">
-                    Contact Number
-                  </label>
-                  <input
-                    {...register("contactNumber")}
-                    type="number"
-                    placeholder="Contact Number"
-                    className="w-full rounded-[7px] border-[1.5px] border-stroke bg-transparent px-5.5 py-3 text-dark outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-gray-2 dark:border-dark-3 dark:bg-dark-2 dark:text-white dark:focus:border-primary"
-                  />
-                  {errors.contactNumber && (
-                    <p className="text-sm text-red-600">
-                      {errors.contactNumber.message}
-                    </p>
-                  )}
-                </div>
-
-                <div>
-                  <label className="mb-3 block text-body-sm font-medium text-dark dark:text-white">
-                    Website URL
-                  </label>
-                  <input
-                    {...register("websiteURL")}
-                    type="text"
-                    placeholder="Website URL"
-                    className="w-full rounded-[7px] border-[1.5px] border-stroke bg-transparent px-5.5 py-3 text-dark outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-gray-2 dark:border-dark-3 dark:bg-dark-2 dark:text-white dark:focus:border-primary"
-                  />
-                  {errors.websiteURL && (
-                    <p className="text-sm text-red-600">
-                      {errors.websiteURL.message}
-                    </p>
-                  )}
-                </div>
-
-
-                <div>
-                  <label className="mb-3 block text-body-sm font-medium text-dark dark:text-white">
-                    Established Year
+                    Issue Date
                   </label>
                   <DatePickerOne />
 
                   {/* <input
-                    {...register("Established Year")}
+                    {...register("Issue Date")}
                     type="calendar"
-                    placeholder="Established Year"
+                    placeholder="Issue Date"
                     className="w-full rounded-[7px] border-[1.5px] border-stroke bg-transparent px-5.5 py-3 text-dark outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-gray-2 dark:border-dark-3 dark:bg-dark-2 dark:text-white dark:focus:border-primary"
                   /> */}
-                  {errors.establishedYear && (
+                  {errors.issueDate && (
                     <p className="text-sm text-red-600">
-                      {errors.establishedYear.message}
+                      {errors.issueDate.message}
+                    </p>
+                  )}
+                </div>
+
+
+                <div>
+                  <label className="mb-3 block text-body-sm font-medium text-dark dark:text-white">
+                    College Name
+                  </label>
+                  <input
+                    {...register("collegeName")}
+                    type="text"
+                    placeholder="College Name"
+                    className="w-full rounded-[7px] border-[1.5px] border-stroke bg-transparent px-5.5 py-3 text-dark outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-gray-2 dark:border-dark-3 dark:bg-dark-2 dark:text-white dark:focus:border-primary"
+                  />
+                  {errors.collegeName && (
+                    <p className="text-sm text-red-600">
+                      {errors.collegeName.message}
                     </p>
                   )}
                 </div>
 
                 <div>
+                  <label className="mb-3 block text-body-sm font-medium text-dark dark:text-white">
+                    University Name
+                  </label>
+                  <input
+                    {...register("universityName")}
+                    type="text"
+                    placeholder="University Name"
+                    className="w-full rounded-[7px] border-[1.5px] border-stroke bg-transparent px-5.5 py-3 text-dark outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-gray-2 dark:border-dark-3 dark:bg-dark-2 dark:text-white dark:focus:border-primary"
+                  />
+                  {errors.universityName && (
+                    <p className="text-sm text-red-600">
+                      {errors.universityName.message}
+                    </p>
+                  )}
+                </div>
+
+                <div>
+                  <label className="mb-3 block text-body-sm font-medium text-dark dark:text-white">
+                    Course Duration
+                  </label>
+                  <input
+                    {...register("courseDuration")}
+                    type="text"
+                    placeholder="Course Duration"
+                    className="w-full rounded-[7px] border-[1.5px] border-stroke bg-transparent px-5.5 py-3 text-dark outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-gray-2 dark:border-dark-3 dark:bg-dark-2 dark:text-white dark:focus:border-primary"
+                  />
+                  {errors.courseDuration && (
+                    <p className="text-sm text-red-600">
+                      {errors.courseDuration.message}
+                    </p>
+                  )}
+                </div>
+
+                <div>
+                  <label className="mb-3 block text-body-sm font-medium text-dark dark:text-white">
+                    Affiliation Number
+                  </label>
+                  <input
+                    {...register("affiliationNumber")}
+                    type="text"
+                    placeholder="Affiliation Number"
+                    className="w-full rounded-[7px] border-[1.5px] border-stroke bg-transparent px-5.5 py-3 text-dark outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-gray-2 dark:border-dark-3 dark:bg-dark-2 dark:text-white dark:focus:border-primary"
+                  />
+                  {errors.affiliationNumber && (
+                    <p className="text-sm text-red-600">
+                      {errors.affiliationNumber.message}
+                    </p>
+                  )}
+                </div>
+
+               
+
+                <div>
                   <DropzoneWrapper>
                     <Typography variant='text-body-sm' fontWeight={500} color="textPrimary" sx={{ mb: 2.5 }}>
-                      Company Logo
-                      {!!errors.companyLogo && (
-                        <span style={{ color: 'red', fontSize: '14px', position: 'absolute', right: '65px' }}>Invalid Image format {!!errors.companyLogo}</span>
+                      University Logo
+                      {!!errors.universityLogo && (
+                        <span style={{ color: 'red', fontSize: '14px', position: 'absolute', right: '65px' }}>Invalid Image format {!!errors.universityLogo}</span>
                       )}
                     </Typography>
                     <Controller
-                      name='Company Logo'
+                      name='University Logo'
                       control={control}
                       defaultValue=''
                       render={({ field }) => (
                         <div>
-                          <FileUploaderSingle file={field.value} setFile={field.onChange} error={errors.companyLogo} />
+                          <FileUploaderSingle file={field.value} setFile={field.onChange} error={errors.universityLogo} />
                         </div>
                       )}
                     />
-
-                    <div>
-                  <SelectDropdown
-                    data={[{ _id: 1, name: 'india' },{ _id: 2, name: 'uae' }]}
-                    name={" country"}
-                    register={register("country")}
-                  />
-                  {errors.country && (
-                    <p className="text-sm text-red-600">
-                      {errors.country.message}
-                    </p>
-                  )}
-                </div>
 
                    
 
@@ -310,4 +310,4 @@ const CompanyEditForm = () => {
   );
 };
 
-export default CompanyEditForm;
+export default CertificateAddForm;
