@@ -39,7 +39,7 @@ const TablesPage = async () => {
     certificateNumber:'A1',
     studentId:1,
     studentName:'Abu',
-    collgeName:'Wiras',
+    collegeName:'Wiras',
     universityName:'kannur',
 
   }]
