@@ -35,7 +35,7 @@ try {
 const TablesPage = async () => {
   // const response = await getAllBrands()
   // const brands = response.data.brands
-  const companies: any = [{
+  const certificates: any = [{
     certificateNumber:'A1',
     studentId:1,
     studentName:'Abu',
@@ -47,7 +47,7 @@ const TablesPage = async () => {
     <DefaultLayout>
       <Breadcrumb pageName="Certificates" navigation={packageData}/>
       <div className="flex flex-col gap-10">
-        <CertificateTable listOfCertificate={Certificate}/>
+        <CertificateTable listOfCertificate={certificates}/>
       </div>
     </DefaultLayout>
   );

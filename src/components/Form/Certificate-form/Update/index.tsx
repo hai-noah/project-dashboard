@@ -67,7 +67,7 @@ const navigationData: PackageNavigation[] = [
   },
 ];
 
-const CertificateEditForm = () => {
+const CertificateAddForm = () => {
 
 
   const router = useRouter();
@@ -103,7 +103,7 @@ const CertificateEditForm = () => {
   return (
     <>
 
-      <Breadcrumb pageName="ADD CERTIFICATE" navigation={navigationData} />
+      <Breadcrumb pageName="EDIT CERTIFICATE" navigation={navigationData} />
       <div className="gap-9 sm:grid-cols-2">
 
         <form onSubmit={handleSubmit(submitData)}>
@@ -112,7 +112,7 @@ const CertificateEditForm = () => {
             <div className="rounded-[10px] border border-stroke bg-white shadow-1 dark:border-dark-3 dark:bg-gray-dark dark:shadow-card">
               <div className="border-b border-stroke px-6.5 py-4 dark:border-dark-3">
                 <h3 className="font-medium text-dark dark:text-white">
-                  Add Certificate
+                  Edit Certificate
                 </h3>
               </div>
               <div className="flex flex-col gap-5.5 p-6.5">
@@ -154,12 +154,12 @@ const CertificateEditForm = () => {
                   <label className="mb-3 block text-body-sm font-medium text-dark dark:text-white">
                     Student Name
                   </label>
-                  <textarea
+                  <input
                     {...register("studentName")}
-                    rows={6}
+                    type="text"
                     placeholder="Student Name"
                     className="w-full rounded-[7px] border-[1.5px] border-stroke bg-transparent px-5.5 py-3 text-dark outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-gray-2 dark:border-dark-3 dark:bg-dark-2 dark:text-white dark:focus:border-primary"
-                  ></textarea>
+                  />
                   {errors.studentName && (
                     <p className="text-sm text-red-600">
                       {errors.studentName.message}
@@ -261,22 +261,22 @@ const CertificateEditForm = () => {
 
                 <div>
                   <DropzoneWrapper>
-                    <Typography variant='text-body-sm' fontWeight={500} color="textPrimary" sx={{ mb: 2.5 }}>
+                    {/* <Typography variant='text-body-sm' fontWeight={500} color="textPrimary" sx={{ mb: 2.5 }}>
                       University Logo
                       {!!errors.universityLogo && (
                         <span style={{ color: 'red', fontSize: '14px', position: 'absolute', right: '65px' }}>Invalid Image format {!!errors.universityLogo}</span>
-                      )}
-                    </Typography>
+                      )} */}
+                    {/* </Typography>
                     <Controller
                       name='University Logo'
                       control={control}
                       defaultValue=''
-                      render={({ field }) => (
-                        <div>
+                      render={({ field }) => ( */}
+                        {/* <div>
                           <FileUploaderSingle file={field.value} setFile={field.onChange} error={errors.universityLogo} />
                         </div>
                       )}
-                    />
+                    /> */}
 
                    
 
@@ -310,4 +310,4 @@ const CertificateEditForm = () => {
   );
 };
 
-export default CertificateEditForm;
+export default CertificateAddForm;

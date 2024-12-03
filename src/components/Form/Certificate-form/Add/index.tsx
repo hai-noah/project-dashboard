@@ -154,12 +154,12 @@ const CertificateAddForm = () => {
                   <label className="mb-3 block text-body-sm font-medium text-dark dark:text-white">
                     Student Name
                   </label>
-                  <textarea
+                  <input
                     {...register("studentName")}
-                    rows={6}
+                    type="text"
                     placeholder="Student Name"
                     className="w-full rounded-[7px] border-[1.5px] border-stroke bg-transparent px-5.5 py-3 text-dark outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-gray-2 dark:border-dark-3 dark:bg-dark-2 dark:text-white dark:focus:border-primary"
-                  ></textarea>
+                  />
                   {errors.studentName && (
                     <p className="text-sm text-red-600">
                       {errors.studentName.message}
@@ -261,22 +261,22 @@ const CertificateAddForm = () => {
 
                 <div>
                   <DropzoneWrapper>
-                    <Typography variant='text-body-sm' fontWeight={500} color="textPrimary" sx={{ mb: 2.5 }}>
+                    {/* <Typography variant='text-body-sm' fontWeight={500} color="textPrimary" sx={{ mb: 2.5 }}>
                       University Logo
                       {!!errors.universityLogo && (
                         <span style={{ color: 'red', fontSize: '14px', position: 'absolute', right: '65px' }}>Invalid Image format {!!errors.universityLogo}</span>
-                      )}
-                    </Typography>
+                      )} */}
+                    {/* </Typography>
                     <Controller
                       name='University Logo'
                       control={control}
                       defaultValue=''
-                      render={({ field }) => (
-                        <div>
+                      render={({ field }) => ( */}
+                        {/* <div>
                           <FileUploaderSingle file={field.value} setFile={field.onChange} error={errors.universityLogo} />
                         </div>
                       )}
-                    />
+                    /> */}
 
                    
 
