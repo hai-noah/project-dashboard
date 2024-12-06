@@ -12,7 +12,7 @@ type Props = {
 
 const CertificateTable = ({ listOfCertificate: listOfCertificate }: Props) => {
   const [searchTerm, setSearchTerm] = useState("");
-  let [itemId, setItemId] = useState();
+  let [itemId, setItemId] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 5;
 
