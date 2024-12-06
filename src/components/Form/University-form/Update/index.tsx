@@ -29,12 +29,21 @@ import { PackageNavigation } from "@/types/packageNavigation";
 import SelectDropdown from "@/components/FormElements/SelectGroup/SelectDropdownForProduct";
 
 const mySchema = z.object({
-  brandName: string().trim().min(1, { message: "Brand Name is required." }),
-  brandDescription: string().trim(),
-  brandLogo: any().refine((file) => file?.size <= MAX_FILE_SIZE, 'Max image size is 5MB.')
-    .refine(
-      (file) => ACCEPTED_IMAGE_TYPES.includes(file?.type),
-      "Only .jpg, .jpeg, .png and .webp formats are supported."),
+  universityId: z.string().trim().min(1, { message: "University Id is required." }),
+  universityName: z.string().trim().min(1, { message: "University Name is required." }),
+  address: z.string().trim().min(1, { message: "Address is required." }),
+  email_id: z.string().trim().min(1, { message: "Email_id is required." }),
+  contactNumber: z.string().trim().min(1, { message: "contact Number is required." }),
+  websiteURL: z.string().trim().min(1, { message: "Website URL is required." }),
+  establishedYear: z.string().trim().min(1, { message: "Year is required." }),
+  accreditationStatus: z.string().trim().min(1, { message: "Status is required." }),
+  country: z.string().trim().min(1, { message: "Counrty is required." }),
+  deanDirectorName: z.string().trim().min(1, { message: "Name is required." }),
+  universityLogo: z.any()
+  // universityLogo: z.any().refine((file) => file?.size <= MAX_FILE_SIZE, 'Max image size is 5MB.')
+  //   .refine(
+  //     (file) => ACCEPTED_IMAGE_TYPES.includes(file?.type),
+  //     "Only .jpg, .jpeg, .png and .webp formats are supported."),
 });
 const MAX_FILE_SIZE = 5000000;
 const ACCEPTED_IMAGE_TYPES = ["image/jpeg", "image/jpg", "image/png", "image/webp"];
@@ -83,6 +92,7 @@ const UniversityEditForm = () => {
 
   const submitData = async (data: any) => {
     try {
+      console.log('data::', data)
       // const formData = serialize(data)
       // const response = await brandApi.createBrand(formData);
 
@@ -91,8 +101,8 @@ const UniversityEditForm = () => {
       //   toast.success('Brand Added Successfully.')
       //   router.push("/tables/brands");
       // }
-      toast.success('Brand Added Successfully.')
-      router.push("/tables/brands");
+      toast.success('University Edited Successfully.')
+      router.push("/universities");
     } catch (error: any) {
       if (error.response.status == 404) {
         toast.error(error.message)
@@ -126,9 +136,9 @@ const UniversityEditForm = () => {
                     placeholder="University Id"
                     className="w-full rounded-[7px] border-[1.5px] border-stroke bg-transparent px-5.5 py-3 text-dark outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-gray-2 dark:border-dark-3 dark:bg-dark-2 dark:text-white dark:focus:border-primary"
                   />
-                  {errors.brandName && (
+                  {errors.universityId && (
                     <p className="text-sm text-red-600">
-                      {errors.brandName.message}
+                      {errors.universityId.message}
                     </p>
                   )}
                 </div>
@@ -143,9 +153,9 @@ const UniversityEditForm = () => {
                     placeholder="University Name"
                     className="w-full rounded-[7px] border-[1.5px] border-stroke bg-transparent px-5.5 py-3 text-dark outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-gray-2 dark:border-dark-3 dark:bg-dark-2 dark:text-white dark:focus:border-primary"
                   />
-                  {errors.brandName && (
+                  {errors.universityName && (
                     <p className="text-sm text-red-600">
-                      {errors.brandName.message}
+                      {errors.universityName.message}
                     </p>
                   )}
                 </div>
@@ -155,14 +165,14 @@ const UniversityEditForm = () => {
                     Address
                   </label>
                   <textarea
-                    {...register("Address")}
+                    {...register("address")}
                     rows={6}
                     placeholder="Address"
                     className="w-full rounded-[7px] border-[1.5px] border-stroke bg-transparent px-5.5 py-3 text-dark outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-gray-2 dark:border-dark-3 dark:bg-dark-2 dark:text-white dark:focus:border-primary"
                   ></textarea>
-                  {errors.brandDescription && (
+                  {errors.address && (
                     <p className="text-sm text-red-600">
-                      {errors.brandDescription.message}
+                      {errors.address.message}
                     </p>
                   )}
                 </div>
@@ -173,14 +183,14 @@ const UniversityEditForm = () => {
                     Email-Id
                   </label>
                   <input
-                    {...register("Email-Id")}
+                    {...register("email_id")}
                     type="email"
-                    placeholder="Email-Id"
+                    placeholder="Email_Id"
                     className="w-full rounded-[7px] border-[1.5px] border-stroke bg-transparent px-5.5 py-3 text-dark outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-gray-2 dark:border-dark-3 dark:bg-dark-2 dark:text-white dark:focus:border-primary"
                   />
-                  {errors.brandName && (
+                  {errors.email_id && (
                     <p className="text-sm text-red-600">
-                      {errors.brandName.message}
+                      {errors.email_id.message}
                     </p>
                   )}
                 </div>
@@ -190,14 +200,14 @@ const UniversityEditForm = () => {
                     Contact Number
                   </label>
                   <input
-                    {...register("Contact Number")}
+                    {...register("contactNumber")}
                     type="number"
                     placeholder="Contact Number"
                     className="w-full rounded-[7px] border-[1.5px] border-stroke bg-transparent px-5.5 py-3 text-dark outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-gray-2 dark:border-dark-3 dark:bg-dark-2 dark:text-white dark:focus:border-primary"
                   />
-                  {errors.brandName && (
+                  {errors.contactNumber && (
                     <p className="text-sm text-red-600">
-                      {errors.brandName.message}
+                      {errors.contactNumber.message}
                     </p>
                   )}
                 </div>
@@ -207,14 +217,14 @@ const UniversityEditForm = () => {
                     Website URL
                   </label>
                   <input
-                    {...register("Website URL")}
+                    {...register("websiteURL")}
                     type="text"
                     placeholder="Website URL"
                     className="w-full rounded-[7px] border-[1.5px] border-stroke bg-transparent px-5.5 py-3 text-dark outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-gray-2 dark:border-dark-3 dark:bg-dark-2 dark:text-white dark:focus:border-primary"
                   />
-                  {errors.brandName && (
+                  {errors.websiteURL && (
                     <p className="text-sm text-red-600">
-                      {errors.brandName.message}
+                      {errors.websiteURL.message}
                     </p>
                   )}
                 </div>
@@ -232,9 +242,9 @@ const UniversityEditForm = () => {
                     placeholder="Established Year"
                     className="w-full rounded-[7px] border-[1.5px] border-stroke bg-transparent px-5.5 py-3 text-dark outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-gray-2 dark:border-dark-3 dark:bg-dark-2 dark:text-white dark:focus:border-primary"
                   /> */}
-                  {errors.brandName && (
+                  {errors.establishedYear && (
                     <p className="text-sm text-red-600">
-                      {errors.brandName.message}
+                      {errors.establishedYear.message}
                     </p>
                   )}
                 </div>
@@ -243,11 +253,11 @@ const UniversityEditForm = () => {
                   <SelectDropdown
                     data={[{ _id: 1, name: 'pending' }]}
                     name={" Accreditation Status"}
-                    register={register("productBrand")}
+                    register={register("accreditationStatus")}
                   />
-                  {errors.brandName && (
+                  {errors.accreditationStatus && (
                     <p className="text-sm text-red-600">
-                      {errors.brandName.message}
+                      {errors.accreditationStatus.message}
                     </p>
                   )}
                 </div>
@@ -256,7 +266,7 @@ const UniversityEditForm = () => {
                     <Typography variant='text-body-sm' fontWeight={500} color="textPrimary" sx={{ mb: 2.5 }}>
                       University Logo
                       {!!errors.universityLogo && (
-                        <span style={{ color: 'red', fontSize: '14px', position: 'absolute', right: '65px' }}>Invalid Image format {!!errors.brandLogo}</span>
+                        <span style={{ color: 'red', fontSize: '14px', position: 'absolute', right: '65px' }}>Invalid Image format {!!errors.universityLogo}</span>
                       )}
                     </Typography>
                     <Controller
@@ -265,7 +275,7 @@ const UniversityEditForm = () => {
                       defaultValue=''
                       render={({ field }) => (
                         <div>
-                          <FileUploaderSingle file={field.value} setFile={field.onChange} error={errors.brandLogo} />
+                          <FileUploaderSingle file={field.value} setFile={field.onChange} error={errors.universityLogo} />
                         </div>
                       )}
                     />
@@ -275,14 +285,14 @@ const UniversityEditForm = () => {
                         Dean/Director Name
                       </label>
                       <input
-                        {...register("Dean/Director Name")}
+                        {...register("deanDirectorName")}
                         type="text"
                         placeholder="Dean/Director Name"
                         className="w-full rounded-[7px] border-[1.5px] border-stroke bg-transparent px-5.5 py-3 text-dark outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-gray-2 dark:border-dark-3 dark:bg-dark-2 dark:text-white dark:focus:border-primary"
                       />
-                      {errors.brandName && (
+                      {errors.deanDirectorName && (
                         <p className="text-sm text-red-600">
-                          {errors.brandName.message}
+                          {errors.deanDirectorName.message}
                         </p>
                       )}
                     </div>
@@ -291,11 +301,11 @@ const UniversityEditForm = () => {
                   <SelectDropdown
                     data={[{ _id: 1, name: 'india' },{ _id: 2, name: 'uae' }]}
                     name={" country"}
-                    register={register("productBrand")}
+                    register={register("country")}
                   />
-                  {errors.brandName && (
+                  {errors.country && (
                     <p className="text-sm text-red-600">
-                      {errors.brandName.message}
+                      {errors.country.message}
                     </p>
                   )}
                 </div>

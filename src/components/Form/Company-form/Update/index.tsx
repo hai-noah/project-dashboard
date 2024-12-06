@@ -98,7 +98,7 @@ const CompanyEditForm = () => {
       //   toast.success('Brand Added Successfully.')
       //   router.push("/tables/brands");
       // }
-      toast.success('Company Added Successfully.')
+      toast.success('Company Edited Successfully.')
       router.push("/tables/company");
     } catch (error: any) {
       if (error.response.status == 404) {
@@ -119,7 +119,7 @@ const CompanyEditForm = () => {
             <div className="rounded-[10px] border border-stroke bg-white shadow-1 dark:border-dark-3 dark:bg-gray-dark dark:shadow-card">
               <div className="border-b border-stroke px-6.5 py-4 dark:border-dark-3">
                 <h3 className="font-medium text-dark dark:text-white">
-                  Add Company
+                  Edit Company
                 </h3>
               </div>
               <div className="flex flex-col gap-5.5 p-6.5">

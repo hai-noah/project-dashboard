@@ -91,7 +91,7 @@ const CertificateAddForm = () => {
       //   toast.success('Brand Added Successfully.')
       //   router.push("/tables/brands");
       // }
-      toast.success('Certificat Added Successfully.')
+      toast.success('Certificat Edited Successfully.')
       router.push("/certificate");
     } catch (error: any) {
       if (error.response.status == 404) {
