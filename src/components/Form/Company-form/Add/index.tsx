@@ -4,7 +4,6 @@ import { appendErrors, Controller, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { any, string, z } from "zod";
 import { useRouter } from "next/navigation";
-import { brandApi as companyApi } from "@/api/brandApi";
 import { useState } from "react";
 import Link from "next/link";
 import CheckboxFive from "@/components/FormElements/Checkboxes/CheckboxFive";
@@ -27,6 +26,7 @@ import { Typography } from "@mui/material";
 import FileUploaderSingle from "@/components/file-upload/singleFileUpload";
 import { PackageNavigation } from "@/types/packageNavigation";
 import SelectDropdown from "@/components/FormElements/SelectGroup/SelectDropdownForProduct";
+import { companyApi } from "@/api/companyApi";
 
 const mySchema = z.object({
   companyId: z.string().trim().min(1, { message: "Company Id is required." }),
@@ -80,8 +80,8 @@ const CompanyAddForm = () => {
     console.log(data)
     try {
      
-      const formData = serialize(data)
-      const response = await companyApi.createCompany(formData);
+      // const formData = serialize(data)
+      const response = await companyApi.createCompany(data);
 
       if (response.data.success == true) {
 
