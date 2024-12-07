@@ -27,6 +27,7 @@ import { Typography } from "@mui/material";
 import FileUploaderSingle from "@/components/file-upload/singleFileUpload";
 import { PackageNavigation } from "@/types/packageNavigation";
 import SelectDropdown from "@/components/FormElements/SelectGroup/SelectDropdownForProduct";
+import { universityApi } from "@/api/universityApi";
 
 const mySchema = z.object({
   universityId: z.string().trim().min(1, { message: "University Id is required." }),
@@ -94,13 +95,13 @@ const UniversityAddForm = () => {
     try {
       console.log('data::', data)
       // const formData = serialize(data)
-      // const response = await brandApi.createBrand(formData);
+      const response = await universityApi.createUniversity(data);
 
-      // if (response.data.success == true) {
+      if (response.data.success == true) {
 
-      //   toast.success('Brand Added Successfully.')
-      //   router.push("/tables/brands");
-      // }
+        toast.success('University Added Successfully.')
+        router.push("/universities");
+      }
       toast.success('University Added Successfully.')
       router.push("/universities");
     } catch (error: any) {
