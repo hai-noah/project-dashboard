@@ -4,7 +4,6 @@ import { appendErrors, Controller, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { any, string, z } from "zod";
 import { useRouter } from "next/navigation";
-import { brandApi } from "@/api/brandApi";
 import { useState } from "react";
 import Link from "next/link";
 import CheckboxFive from "@/components/FormElements/Checkboxes/CheckboxFive";
@@ -27,12 +26,13 @@ import { Typography } from "@mui/material";
 import FileUploaderSingle from "@/components/file-upload/singleFileUpload";
 import { PackageNavigation } from "@/types/packageNavigation";
 import SelectDropdown from "@/components/FormElements/SelectGroup/SelectDropdownForProduct";
+import { certificateApi } from "@/api/certificateApi";
 
 const mySchema = z.object({
   certificateNumber: z.string().trim().min(1, { message: "Certificate Number is required." }),
   studentId: z.string().trim().min(1, { message: "Student ID is required." }),
   studentName: z.string().trim().min(1, { message: "Student Name is required." }),
-  issueDate: z.string().trim().min(1, { message: "Issue Date is required." }), 
+  issueDate: z.string().trim().optional(), 
   collegeName: z.string().trim().min(1, { message: "College Name is required." }), 
   universityName: z.string().trim().min(1, { message: "University Name is required." }),
   courseDuration: z.string().trim().min(1, { message: "Course Duration is required." }), 
@@ -84,13 +84,13 @@ const CertificateAddForm = () => {
     try {
       console.log('data::', data)
       // const formData = serialize(data)
-      // const response = await brandApi.createBrand(formData);
+      const response = await certificateApi.createCertificate(data);
 
-      // if (response.data.success == true) {
+      if (response.data.success == true) {
 
-      //   toast.success('Brand Added Successfully.')
-      //   router.push("/tables/brands");
-      // }
+        toast.success('Certificate Added Successfully.')
+        router.push("/certificate");
+      }
       toast.success('Certificat Added Successfully.')
       router.push("/certificate");
     } catch (error: any) {

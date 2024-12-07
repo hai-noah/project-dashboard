@@ -36,11 +36,11 @@ const mySchema = z.object({
   email_id: z.string().trim().min(1, { message: "Email_id is required." }),
   contactNumber: z.string().trim().min(1, { message: "contact Number is required." }),
   websiteURL: z.string().trim().min(1, { message: "Website URL is required." }),
-  establishedYear: z.string().trim().min(1, { message: "Year is required." }),
+  establishedYear: z.string().optional(),
   accreditationStatus: z.string().trim().min(1, { message: "Status is required." }),
   country: z.string().trim().min(1, { message: "Counrty is required." }),
   deanDirectorName: z.string().trim().min(1, { message: "Name is required." }),
-  universityLogo: z.any()
+  universityLogo: z.any(),
   // universityLogo: z.any().refine((file) => file?.size <= MAX_FILE_SIZE, 'Max image size is 5MB.')
   //   .refine(
   //     (file) => ACCEPTED_IMAGE_TYPES.includes(file?.type),
@@ -90,6 +90,7 @@ const UniversityAddForm = () => {
     control,
     formState: { errors, isSubmitting },
   } = useForm<TMySchema>({ resolver: zodResolver(mySchema) });
+  console.log(errors)
 
   const submitData = async (data: any) => {
     try {

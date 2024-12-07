@@ -2,14 +2,15 @@ import { axiosClient } from "./config/axiosConfig";
 
 export const certificateApi = {
   createCertificate: async function (body: any) {
+    console.log(body)
     return await axiosClient.post(
       "certificates/",
-      body,
-      {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-      },
+      body
+    //   {
+    //     headers: {
+    //       "Content-Type": "multipart/form-data",
+    //     },
+    //   },
     );
   },
   updateCertificate: async function (certificateId: any, body: any) {
