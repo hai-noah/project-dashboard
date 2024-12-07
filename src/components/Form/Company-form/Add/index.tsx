@@ -4,7 +4,7 @@ import { appendErrors, Controller, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { any, string, z } from "zod";
 import { useRouter } from "next/navigation";
-import { brandApi } from "@/api/brandApi";
+import { brandApi as companyApi } from "@/api/brandApi";
 import { useState } from "react";
 import Link from "next/link";
 import CheckboxFive from "@/components/FormElements/Checkboxes/CheckboxFive";
@@ -35,7 +35,7 @@ const mySchema = z.object({
   email_id: z.string().trim().min(1, { message: "Email_id is required." }),
   contactNumber: z.string().trim().min(1, { message: "Contact Number is required." }),
   websiteURL: z.string().trim().min(1, { message: "Website URL is required." }),
-  establishedYear: z.string().trim().min(1, { message: "Year is required." }),
+  establishedYear: z.string().optional(),
   country: z.string().trim().min(1, { message: "Counrty is required." }),
   companyLogo:z.any(),
   // companyLogo: z.any().refine((file) => file?.size <= MAX_FILE_SIZE, 'Max image size is 5MB.')
@@ -77,16 +77,17 @@ const CompanyAddForm = () => {
   console.log(errors)
 
   const submitData = async (data: any) => {
+    console.log(data)
     try {
-      console.log('data::', data)
-      // const formData = serialize(data)
-      // const response = await brandApi.createBrand(formData);
+     
+      const formData = serialize(data)
+      const response = await companyApi.createCompany(formData);
 
-      // if (response.data.success == true) {
+      if (response.data.success == true) {
 
-      //   toast.success('Brand Added Successfully.')
-      //   router.push("/tables/brands");
-      // }
+        toast.success('Company Added Successfully.')
+        router.push("/companies");
+      }
       toast.success('Company Added Successfully.')
       router.push("/companies");
     } catch (error: any) {
@@ -237,14 +238,14 @@ const CompanyAddForm = () => {
 
                 <div>
                   <DropzoneWrapper>
-                    <Typography variant='text-body-sm' fontWeight={500} color="textPrimary" sx={{ mb: 2.5 }}>
+                    <Typography fontWeight={500} color="textPrimary" sx={{ mb: 2.5 }}>
                       Company Logo
                       {!!errors.companyLogo && (
                         <span style={{ color: 'red', fontSize: '14px', position: 'absolute', right: '65px' }}>Invalid Image format {!!errors.companyLogo}</span>
                       )}
                     </Typography>
                     <Controller
-                      name='Company Logo'
+                      name='companyLogo'
                       control={control}
                       defaultValue=''
                       render={({ field }) => (
