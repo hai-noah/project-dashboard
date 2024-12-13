@@ -93,7 +93,7 @@ const UniversityTable = ({ listOfUniversity: listOfUniversity }: Props) => {
                 </form>
               </div>
               <Link
-                href={"/universities/add"}
+                href={"/admin/universities/add"}
                 className="mb-3 mr-7 rounded-md bg-black px-4 py-2 text-white dark:bg-white dark:text-black"
               >
                 Add University
@@ -172,7 +172,7 @@ const UniversityTable = ({ listOfUniversity: listOfUniversity }: Props) => {
                         className={`border-[#eee] px-4 py-4 dark:border-dark-3 xl:pr-7.5 ${index === packageItem.length - 1 ? "border-b-0" : "border-b"}`}
                       >
                         <div className="flex items-center justify-end space-x-3.5">
-                          <Link href={`/universities/edit/${packageItem._id}`}>
+                          <Link href={`/admin/universities/edit/${packageItem._id}`}>
                             <svg
                               xmlns="http://www.w3.org/2000/svg"
                               width="20"

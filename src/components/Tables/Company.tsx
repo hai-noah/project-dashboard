@@ -92,7 +92,7 @@ const CompanyTable = ({ listOfCompany: listOfCompany }: Props) => {
                 </form>
               </div>
               <Link
-                href={"/companies/add"}
+                href={"/admin/companies/add"}
                 className="mb-3 mr-7 rounded-md bg-black px-4 py-2 text-white dark:bg-white dark:text-black"
               >
                   Add Company
@@ -171,7 +171,7 @@ const CompanyTable = ({ listOfCompany: listOfCompany }: Props) => {
                         className={`border-[#eee] px-4 py-4 dark:border-dark-3 xl:pr-7.5 ${index === packageItem.length - 1 ? "border-b-0" : "border-b"}`}
                       >
                         <div className="flex items-center justify-end space-x-3.5">
-                          <Link href={`/companies/edit/${packageItem._id}`}>
+                          <Link href={`/admin/companies/edit/${packageItem._id}`}>
                             <svg
                               xmlns="http://www.w3.org/2000/svg"
                               width="20"

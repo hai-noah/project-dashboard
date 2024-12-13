@@ -4,7 +4,8 @@ import DefaultLayout from "@/components/Layouts/DefaultLaout";
 import { brandApi } from "@/api/brandApi";
 import toast from "react-hot-toast";
 import { PackageNavigation } from "@/types/packageNavigation";
-import CompanyTable from "@/components/Tables/Company";
+import CertificateTable from "@/components/Tables/certificate";
+import { Certificate } from "crypto";
 
 export const metadata: Metadata = {
   title: "Next.js Tables Page | NextAdmin - Next.js Dashboard Kit",
@@ -17,8 +18,8 @@ const packageData: PackageNavigation[] = [
     link:'/'
   },
   {
-    name:'Companies ',
-    link:'/tables/company'
+    name:'Certificates ',
+    link:'/tables/certificate'
   },
 ];
 
@@ -34,19 +35,19 @@ try {
 const TablesPage = async () => {
   // const response = await getAllBrands()
   // const brands = response.data.brands
-  const companies: any = [{
-    _id:1,
-    companyName:'com1',
-    year:'2002',
-    country:'india',
-    status:'active',
+  const certificates: any = [{
+    certificateNumber:'A1',
+    studentId:1,
+    studentName:'Abu',
+    collegeName:'Wiras',
+    universityName:'kannur',
 
   }]
   return (
     <DefaultLayout>
-      <Breadcrumb pageName="Companies" navigation={packageData}/>
+      <Breadcrumb pageName="Certificates" navigation={packageData}/>
       <div className="flex flex-col gap-10">
-        <CompanyTable listOfCompany={companies}/>
+        <CertificateTable listOfCertificate={certificates}/>
       </div>
     </DefaultLayout>
   );
