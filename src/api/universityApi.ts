@@ -24,32 +24,22 @@ export const universityApi = {
       },
     );
   },
-  deleteUniversity: async function (universityId: any, body: any) {
-    return await axiosClient.put(
+  deleteUniversity: async function (universityId: any) {
+    return await axiosClient.delete(
       `universities/delete/${universityId}`,
-      body,
-      {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-      },
+   
     );
   },
-  viewUniversity: async function (universityId: any, body: any) {
-    return await axiosClient.put(
+  viewUniversity: async function (universityId: any) {
+    return await axiosClient.get(
       `universities/view/${universityId}`,
-      body,
-      {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-      },
+
     );
   },
   getAllUniversity: async function () {
     
     return await axiosClient.get(
-      "universities/getAll/",
+      "universities/all/",
     );
   },
 };

@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { toast } from "react-hot-toast";
 import Delete from "@/components/Confirmation/Delete";
+import { universityApi } from "@/api/universityApi";
 
 type Props = {
   listOfUniversity: [];
@@ -35,9 +36,9 @@ const UniversityTable = ({ listOfUniversity: listOfUniversity }: Props) => {
   const router = useRouter();
   // router.refresh();
 
-  async function deleteBrand(id: any) {
+  async function deleteUniversity(id: any) {
     try {
-      const responseDelete = await brandApi.deleteBrand(id);
+      const responseDelete = await universityApi.deleteUniversity(id);
       console.log("first", responseDelete.data.response);
 
       if (responseDelete.data.success == true) {
@@ -105,9 +106,9 @@ const UniversityTable = ({ listOfUniversity: listOfUniversity }: Props) => {
                     <th className="min-w-[150px] px-4 py-4 font-medium text-dark dark:text-white">
                       University Name
                     </th>
-                    <th className="min-w-[150px] px-4 py-4 font-medium text-dark dark:text-white">
+                    {/* <th className="min-w-[150px] px-4 py-4 font-medium text-dark dark:text-white">
                     Established Year
-                    </th>
+                    </th> */}
                     <th className="min-w-[150px] px-4 py-4 font-medium text-dark dark:text-white">
                       Country
                     </th>
@@ -121,13 +122,13 @@ const UniversityTable = ({ listOfUniversity: listOfUniversity }: Props) => {
                   </tr>
                 </thead>
                 <tbody>
-                  {brandData?.map((packageItem: any, index:number) => (
+                  {listOfUniversity?.map((packageItem: any, index:number) => (
                     <tr key={index}>
                       <td
                         className={`border-[#eee] px-4 py-4 dark:border-dark-3 xl:pl-7.5 ${index === packageItem.length - 1 ? "border-b-0" : "border-b"}`}
                       >
                         <h6 className="text-dark dark:text-white">
-                          {packageItem._id}
+                          {packageItem.universityName}
                         </h6>
                         {/* <p className="mt-[3px] text-body-sm font-medium">
                     ${packageItem.price}
@@ -137,30 +138,30 @@ const UniversityTable = ({ listOfUniversity: listOfUniversity }: Props) => {
                         className={`border-[#eee] px-4 py-4 dark:border-dark-3 ${index === packageItem.length - 1 ? "border-b-0" : "border-b"}`}
                       >
                         <p className="text-dark dark:text-white">
-                          {packageItem.universityName}
+                          {packageItem.country}
                         </p>
                       </td>
-                      <td
+                      {/* <td
                         className={`border-[#eee] px-4 py-4 dark:border-dark-3 ${index === packageItem.length - 1 ? "border-b-0" : "border-b"}`}
                       >
                         <p className="text-dark dark:text-white">
                           {packageItem.year}
                         </p>
-                      </td>
-                      <td
+                      </td> */}
+                      {/* <td
                         className={`border-[#eee] px-4 py-4 dark:border-dark-3 ${index === packageItem.length - 1 ? "border-b-0" : "border-b"}`}
                       >
                         <p className="text-dark dark:text-white">
                           {packageItem.country}
                         </p>
-                      </td>
-                      <td
+                      </td> */}
+                      {/* <td
                         className={`border-[#eee] px-4 py-4 dark:border-dark-3 ${index === packageItem.length - 1 ? "border-b-0" : "border-b"}`}
                       >
                         <p className="text-dark dark:text-white">
                           {packageItem.status}
                         </p>
-                      </td>
+                      </td> */}
                       <td
                         className={`border-[#eee] px-4 py-4 dark:border-dark-3 ${index === packageItem.length - 1 ? "border-b-0" : "border-b"}`}
                       ></td>
@@ -193,7 +194,7 @@ const UniversityTable = ({ listOfUniversity: listOfUniversity }: Props) => {
                           >
                             {itemId === packageItem._id && (
                               <Delete
-                                deleteId={deleteBrand}
+                                deleteId={deleteUniversity}
                                 id={packageItem._id}
                                 isOpen={itemId === packageItem._id}
                                 setIsOpen={setItemId}

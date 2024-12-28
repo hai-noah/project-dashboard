@@ -29,27 +29,29 @@ try {
   const response = await universityApi.getAllUniversity();
   return response.data;
 } catch (error:any) {
-  // console.log(error)
+  console.log(error)
   // toast.error(error.message)
 }}
 
 const TablesPage = async () => {
+
   const response = await getAllUniversity()
-  // const universities = response.data.university
-  console.log(response)
+  const data = response.data.university
+
+
   const universities: any = [{
     _id:1,
     universityName:'univ1',
     year:'1999',
     country:'india',
     status:'active',
-
   }]
+
   return (
     <DefaultLayout>
       <Breadcrumb pageName="Universities" navigation={packageData}/>
       <div className="flex flex-col gap-10">
-        <UniversityTable listOfUniversity={universities}/>
+        <UniversityTable listOfUniversity={data}/>
       </div>
     </DefaultLayout>
   );

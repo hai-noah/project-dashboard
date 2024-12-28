@@ -34,7 +34,7 @@ const mySchema = z.object({
   passwordd: z.string().trim().min(1, { message: "Password is required." }),
   universityName: z.string().trim().min(1, { message: "University Name is required." }),
   address: z.string().trim().min(1, { message: "Address is required." }),
-  email_id: z.string().trim().min(1, { message: "Email_id is required." }),
+  email: z.string().trim().min(1, { message: "Email_id is required." }),
   contactNumber: z.string().trim().min(1, { message: "contact Number is required." }),
   websiteURL: z.string().trim().min(1, { message: "Website URL is required." }),
   establishedYear: z.string().trim().min(1, { message: "Year is required." }),
@@ -67,7 +67,7 @@ const navigationData: PackageNavigation[] = [
   },
 ];
 
-const UniversityEditForm = () => {
+const UniversityEditForm = ({data}:{data:any}) => {
 
   const [internal, setInternal] = useState(false);
   const [success, setSuccess] = useState(false);
@@ -90,7 +90,24 @@ const UniversityEditForm = () => {
     handleSubmit,
     control,
     formState: { errors, isSubmitting },
-  } = useForm<TMySchema>({ resolver: zodResolver(mySchema) });
+  } = useForm<TMySchema>({ resolver: zodResolver(mySchema),
+    defaultValues:{
+      userName:data.userName,
+      password:data.password,
+      passwordd:data.passwordd,
+      universityName:data.universityName,
+      address:data.address,
+      email:data.email,
+      contactNumber:data.contactNumber,
+      websiteURL:data.websiteURL,
+      establishedYear:data.establishedYear,
+      accreditationStatus:data.accreditationStatus,
+      country:data.country,
+      deanDirectorName:data.deanDirectorName,
+      universityLogo:data.deanDirectorName,
+
+    }
+   });
 
   const submitData = async (data: any) => {
     try {
@@ -218,14 +235,14 @@ const UniversityEditForm = () => {
                     Email-Id
                   </label>
                   <input
-                    {...register("email_id")}
+                    {...register("email")}
                     type="email"
-                    placeholder="Email_Id"
+                    placeholder="Email"
                     className="w-full rounded-[7px] border-[1.5px] border-stroke bg-transparent px-5.5 py-3 text-dark outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-gray-2 dark:border-dark-3 dark:bg-dark-2 dark:text-white dark:focus:border-primary"
                   />
-                  {errors.email_id && (
+                  {errors.email && (
                     <p className="text-sm text-red-600">
-                      {errors.email_id.message}
+                      {errors.email.message}
                     </p>
                   )}
                 </div>
