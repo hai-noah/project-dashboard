@@ -86,10 +86,10 @@ const CompanyAddForm = () => {
       if (response.data.success == true) {
 
         toast.success('Company Added Successfully.')
-        router.push("/companies");
+        router.push("/admin/companies");
       }
       toast.success('Company Added Successfully.')
-      router.push("/companies");
+      router.push("/admin/companies");
     } catch (error: any) {
       if (error.response.status == 404) {
         toast.error(error.message)

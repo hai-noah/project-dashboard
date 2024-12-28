@@ -5,7 +5,6 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { toast } from "react-hot-toast";
 import Delete from "@/components/Confirmation/Delete";
-import CompanyTable from "./Company";
 
 type Props = {
   listOfUniversity: [];
@@ -104,9 +103,6 @@ const UniversityTable = ({ listOfUniversity: listOfUniversity }: Props) => {
                 <thead>
                   <tr className="bg-[#F7F9FC] text-left dark:bg-dark-2">
                     <th className="min-w-[150px] px-4 py-4 font-medium text-dark dark:text-white">
-                    University ID
-                    </th>
-                    <th className="min-w-[150px] px-4 py-4 font-medium text-dark dark:text-white">
                       University Name
                     </th>
                     <th className="min-w-[150px] px-4 py-4 font-medium text-dark dark:text-white">
@@ -125,7 +121,7 @@ const UniversityTable = ({ listOfUniversity: listOfUniversity }: Props) => {
                   </tr>
                 </thead>
                 <tbody>
-                  {brandData.map((packageItem: any, index:number) => (
+                  {brandData?.map((packageItem: any, index:number) => (
                     <tr key={index}>
                       <td
                         className={`border-[#eee] px-4 py-4 dark:border-dark-3 xl:pl-7.5 ${index === packageItem.length - 1 ? "border-b-0" : "border-b"}`}

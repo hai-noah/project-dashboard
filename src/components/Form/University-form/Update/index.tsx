@@ -29,7 +29,9 @@ import { PackageNavigation } from "@/types/packageNavigation";
 import SelectDropdown from "@/components/FormElements/SelectGroup/SelectDropdownForProduct";
 
 const mySchema = z.object({
-  universityId: z.string().trim().min(1, { message: "University Id is required." }),
+  userName: z.string().trim().min(1, { message: "User Name is required." }),
+  password: z.string().trim().min(1, { message: "Password is required." }),
+  passwordd: z.string().trim().min(1, { message: "Password is required." }),
   universityName: z.string().trim().min(1, { message: "University Name is required." }),
   address: z.string().trim().min(1, { message: "Address is required." }),
   email_id: z.string().trim().min(1, { message: "Email_id is required." }),
@@ -126,22 +128,55 @@ const UniversityEditForm = () => {
                 </h3>
               </div>
               <div className="flex flex-col gap-5.5 p-6.5">
-                <div>
+              <div>
                   <label className="mb-3 block text-body-sm font-medium text-dark dark:text-white">
-                    University Id
+                    User Name
                   </label>
                   <input
-                    {...register("universityId")}
+                    {...register("userName")}
                     type="text"
-                    placeholder="University Id"
+                    placeholder="User Name"
                     className="w-full rounded-[7px] border-[1.5px] border-stroke bg-transparent px-5.5 py-3 text-dark outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-gray-2 dark:border-dark-3 dark:bg-dark-2 dark:text-white dark:focus:border-primary"
                   />
-                  {errors.universityId && (
+                  {errors.userName && (
                     <p className="text-sm text-red-600">
-                      {errors.universityId.message}
+                      {errors.userName.message}
                     </p>
                   )}
                 </div>
+                <div>
+                  <label className="mb-3 block text-body-sm font-medium text-dark dark:text-white">
+                  Password
+                  </label>
+                  <input
+                    {...register("password")}
+                    type="text"
+                    placeholder="Password"
+                    className="w-full rounded-[7px] border-[1.5px] border-stroke bg-transparent px-5.5 py-3 text-dark outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-gray-2 dark:border-dark-3 dark:bg-dark-2 dark:text-white dark:focus:border-primary"
+                  />
+                  {errors.password && (
+                    <p className="text-sm text-red-600">
+                      {errors.password.message}
+                    </p>
+                  )}
+                </div>
+                <div>
+                  <label className="mb-3 block text-body-sm font-medium text-dark dark:text-white">
+                    Password
+                  </label>
+                  <input
+                    {...register("passwordd")}
+                    type="text"
+                    placeholder="Password"
+                    className="w-full rounded-[7px] border-[1.5px] border-stroke bg-transparent px-5.5 py-3 text-dark outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-gray-2 dark:border-dark-3 dark:bg-dark-2 dark:text-white dark:focus:border-primary"
+                  />
+                  {errors.passwordd && (
+                    <p className="text-sm text-red-600">
+                      {errors.passwordd.message}
+                    </p>
+                  )}
+                </div>
+
 
                 <div>
                   <label className="mb-3 block text-body-sm font-medium text-dark dark:text-white">
@@ -262,15 +297,15 @@ const UniversityEditForm = () => {
                   )}
                 </div>
                 <div>
-                  <DropzoneWrapper>
-                    <Typography variant='text-body-sm' fontWeight={500} color="textPrimary" sx={{ mb: 2.5 }}>
+                <DropzoneWrapper>
+                    <Typography fontWeight={500} color="textPrimary" sx={{ mb: 2.5 }}>
                       University Logo
                       {!!errors.universityLogo && (
                         <span style={{ color: 'red', fontSize: '14px', position: 'absolute', right: '65px' }}>Invalid Image format {!!errors.universityLogo}</span>
                       )}
                     </Typography>
                     <Controller
-                      name='University Logo'
+                      name='universityLogo'
                       control={control}
                       defaultValue=''
                       render={({ field }) => (
