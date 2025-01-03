@@ -27,6 +27,7 @@ const packageData: PackageNavigation[] = [
 async function getAllUniversity() {
 try {
   const response = await universityApi.getAllUniversity();
+  console.log('heyyy',response.data)
   return response.data;
 } catch (error:any) {
   console.log(error)
@@ -36,22 +37,16 @@ try {
 const TablesPage = async () => {
 
   const response = await getAllUniversity()
-  const data = response.data.university
+  const universities = response?.data?.university
 
 
-  const universities: any = [{
-    _id:1,
-    universityName:'univ1',
-    year:'1999',
-    country:'india',
-    status:'active',
-  }]
+
 
   return (
     <DefaultLayout>
       <Breadcrumb pageName="Universities" navigation={packageData}/>
       <div className="flex flex-col gap-10">
-        <UniversityTable listOfUniversity={data}/>
+        <UniversityTable listOfUniversity={universities}/>
       </div>
     </DefaultLayout>
   );

@@ -14,6 +14,8 @@ export const metadata: Metadata = {
 async function viewUniversity(id:string) {
   try {
     const response = await universityApi.viewUniversity(id);
+    console.log('heyyy edit',response.data)
+
     // const Products = await response.json();
     return response.data;
   } catch (error:any) {
@@ -24,7 +26,7 @@ async function viewUniversity(id:string) {
 
 const FormElementsPage = async ({params}:{params:{id:string}}) => {
   const response = await viewUniversity(params.id)
-  const university= response.data.university
+  const university= response?.data?.university
   return (
     <DefaultLayout>
       <UniversityEditForm data={university}/>

@@ -12,6 +12,7 @@ type Props = {
 };
 
 const UniversityTable = ({ listOfUniversity: listOfUniversity }: Props) => {
+  console.log(listOfUniversity)
   const [searchTerm, setSearchTerm] = useState("");
   let [itemId, setItemId] = useState();
   const [currentPage, setCurrentPage] = useState(1);
