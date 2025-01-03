@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { toast } from "react-hot-toast";
 import Delete from "@/components/Confirmation/Delete";
+import { companyApi } from "@/api/companyApi";
 
 type Props = {
   listOfCompany: [];
@@ -16,8 +17,8 @@ const CompanyTable = ({ listOfCompany: listOfCompany }: Props) => {
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 5;
 
-  // const filteredBrands = listOfBrands.filter((brandItem: any) =>
-  //   brandItem.brandName.toLowerCase().includes(searchTerm.toLowerCase()),
+  // const filteredBrands = listOfCompany.filter((brandItem: any) =>
+  //   brandItem.companyName.toLowerCase().includes(searchTerm.toLowerCase()),
   // );
 
   // const totalPages = Math.ceil(filteredBrands.length / itemsPerPage);
@@ -35,9 +36,9 @@ const CompanyTable = ({ listOfCompany: listOfCompany }: Props) => {
   const router = useRouter();
   // router.refresh();
 
-  async function deleteBrand(id: any) {
+  async function deleteCompany(id: any) {
     try {
-      const responseDelete = await brandApi.deleteBrand(id);
+      const responseDelete = await companyApi.deleteCompany(id);
       console.log("first", responseDelete.data.response);
 
       if (responseDelete.data.success == true) {
@@ -196,7 +197,7 @@ const CompanyTable = ({ listOfCompany: listOfCompany }: Props) => {
                           >
                             {itemId === packageItem._id && (
                               <Delete
-                                deleteId={deleteBrand}
+                                deleteId={deleteCompany}
                                 id={packageItem._id}
                                 isOpen={itemId === packageItem._id}
                                 setIsOpen={setItemId}

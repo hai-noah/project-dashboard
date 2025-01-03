@@ -1,5 +1,4 @@
 "use client";
-import { brandApi } from "@/api/brandApi";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
