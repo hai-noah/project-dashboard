@@ -32,7 +32,6 @@ import { universityApi } from "@/api/universityApi";
 const mySchema = z.object({
   userName: z.string().trim().min(1, { message: "User Name is required." }),
   password: z.string().trim().min(1, { message: "Password is required." }),
-  passwordd: z.string().trim().min(1, { message: "Password is required." }),
   universityName: z.string().trim().min(1, { message: "University Name is required." }),
   address: z.string().trim().min(1, { message: "Address is required." }),
   email: z.string().trim().min(1, { message: "Email_id is required." }),
@@ -163,23 +162,7 @@ const UniversityAddForm = () => {
                     </p>
                   )}
                 </div>
-                <div>
-                  <label className="mb-3 block text-body-sm font-medium text-dark dark:text-white">
-                    Password
-                  </label>
-                  <input
-                    {...register("passwordd")}
-                    type="text"
-                    placeholder="Password"
-                    className="w-full rounded-[7px] border-[1.5px] border-stroke bg-transparent px-5.5 py-3 text-dark outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-gray-2 dark:border-dark-3 dark:bg-dark-2 dark:text-white dark:focus:border-primary"
-                  />
-                  {errors.passwordd && (
-                    <p className="text-sm text-red-600">
-                      {errors.passwordd.message}
-                    </p>
-                  )}
-                </div>
-
+                
                 <div>
                   <label className="mb-3 block text-body-sm font-medium text-dark dark:text-white">
                     University Name
@@ -334,7 +317,7 @@ const UniversityAddForm = () => {
 
                     <div>
                   <SelectDropdown
-                    data={[{ _id: 'india', name: 'india' },{ _id: 'uae', name: 'uae' }]}
+                    data={[{  name: 'india' },{ name: 'uae' }]}
                     name={" country"}
                     register={register("country")}
                   />

@@ -17,11 +17,11 @@ export const universityApi = {
     return await axiosClient.put(
       `universities/update/${universityId}`,
       body,
-      {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-      },
+      // {
+      //   headers: {
+      //     "Content-Type": "multipart/form-data",
+      //   },
+      // },
     );
   },
   deleteUniversity: async function (universityId: any) {

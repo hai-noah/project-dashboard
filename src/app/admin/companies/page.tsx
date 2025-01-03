@@ -26,23 +26,19 @@ const packageData: PackageNavigation[] = [
 async function getAllCompany() {
 try {
   const response = await companyApi.getAllCompany();
+  console.log('heyyy',response.data)
   return response.data;
 } catch (error:any) {
-  // console.log(error)
+  console.log(error)
   // toast.error(error.message)
 }}
-
 const TablesPage = async () => {
-  // const response = await getAllBrands()
-  // const brands = response.data.brands
-  const companies: any = [{
-    _id:1,
-    companyName:'com1',
-    year:'2002',
-    country:'india',
-    status:'active',
 
-  }]
+  const response = await getAllCompany()
+  const companies = response?.data?.company
+
+
+  
   return (
     <DefaultLayout>
       <Breadcrumb pageName="Companies" navigation={packageData}/>

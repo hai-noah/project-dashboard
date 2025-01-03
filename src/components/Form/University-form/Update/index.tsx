@@ -27,14 +27,14 @@ import { Typography } from "@mui/material";
 import FileUploaderSingle from "@/components/file-upload/singleFileUpload";
 import { PackageNavigation } from "@/types/packageNavigation";
 import SelectDropdown from "@/components/FormElements/SelectGroup/SelectDropdownForProduct";
+import { universityApi } from "@/api/universityApi";
 
 const mySchema = z.object({
   userName: z.string().trim().min(1, { message: "User Name is required." }),
   password: z.string().trim().min(1, { message: "Password is required." }),
-  passwordd: z.string().trim().min(1, { message: "Password is required." }),
   universityName: z.string().trim().min(1, { message: "University Name is required." }),
   address: z.string().trim().min(1, { message: "Address is required." }),
-  email: z.string().trim().min(1, { message: "Email_id is required." }),
+  email: z.string().trim().min(1, { message: "Email is required." }),
   contactNumber: z.string().trim().min(1, { message: "contact Number is required." }),
   websiteURL: z.string().trim().min(1, { message: "Website URL is required." }),
   establishedYear: z.string().trim().min(1, { message: "Year is required." }),
@@ -67,7 +67,7 @@ const navigationData: PackageNavigation[] = [
   },
 ];
 
-const UniversityEditForm = ({data}:{data:any}) => {
+const UniversityEditForm = ({data,id}:any) => {
 
   const [internal, setInternal] = useState(false);
   const [success, setSuccess] = useState(false);
@@ -94,7 +94,6 @@ const UniversityEditForm = ({data}:{data:any}) => {
     defaultValues:{
       userName:data.userName,
       password:data.password,
-      passwordd:data.passwordd,
       universityName:data.universityName,
       address:data.address,
       email:data.email,
@@ -113,15 +112,14 @@ const UniversityEditForm = ({data}:{data:any}) => {
     try {
       console.log('data::', data)
       // const formData = serialize(data)
-      // const response = await brandApi.createBrand(formData);
+      const response = await universityApi.updateUniversity(id,data);
 
       // if (response.data.success == true) {
 
-      //   toast.success('Brand Added Successfully.')
-      //   router.push("/tables/brands");
-      // }
-      toast.success('University Edited Successfully.')
-      router.push("/admin/universities");
+        toast.success('University Added Successfully.')
+        router.push("/admin/universities");
+      
+     
     } catch (error: any) {
       if (error.response.status == 404) {
         toast.error(error.message)
@@ -177,23 +175,7 @@ const UniversityEditForm = ({data}:{data:any}) => {
                     </p>
                   )}
                 </div>
-                <div>
-                  <label className="mb-3 block text-body-sm font-medium text-dark dark:text-white">
-                    Password
-                  </label>
-                  <input
-                    {...register("passwordd")}
-                    type="text"
-                    placeholder="Password"
-                    className="w-full rounded-[7px] border-[1.5px] border-stroke bg-transparent px-5.5 py-3 text-dark outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-gray-2 dark:border-dark-3 dark:bg-dark-2 dark:text-white dark:focus:border-primary"
-                  />
-                  {errors.passwordd && (
-                    <p className="text-sm text-red-600">
-                      {errors.passwordd.message}
-                    </p>
-                  )}
-                </div>
-
+               
 
                 <div>
                   <label className="mb-3 block text-body-sm font-medium text-dark dark:text-white">
@@ -232,7 +214,7 @@ const UniversityEditForm = ({data}:{data:any}) => {
 
                 <div>
                   <label className="mb-3 block text-body-sm font-medium text-dark dark:text-white">
-                    Email-Id
+                    Email
                   </label>
                   <input
                     {...register("email")}
@@ -349,7 +331,7 @@ const UniversityEditForm = ({data}:{data:any}) => {
 
                     <div>
                   <SelectDropdown
-                    data={[{ _id: 1, name: 'india' },{ _id: 2, name: 'uae' }]}
+                    data={[{ name: 'india' },{name: 'uae' }]}
                     name={" country"}
                     register={register("country")}
                   />

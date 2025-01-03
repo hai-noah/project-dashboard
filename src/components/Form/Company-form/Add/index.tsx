@@ -29,10 +29,12 @@ import SelectDropdown from "@/components/FormElements/SelectGroup/SelectDropdown
 import { companyApi } from "@/api/companyApi";
 
 const mySchema = z.object({
-  companyId: z.string().trim().min(1, { message: "Company Id is required." }),
+  userName: z.string().trim().min(1, { message: "User Id is required." }),
+  password: z.string().trim().min(1, { message: "Password is required." }),
+  passwordd: z.string().trim().min(1, { message: "Password is required." }),
   companyName: z.string().trim().min(1, { message: "Company Name is required." }),
   address: z.string().trim().min(1, { message: "Address is required." }),
-  email_id: z.string().trim().min(1, { message: "Email_id is required." }),
+  email: z.string().trim().min(1, { message: "Email is required." }),
   contactNumber: z.string().trim().min(1, { message: "Contact Number is required." }),
   websiteURL: z.string().trim().min(1, { message: "Website URL is required." }),
   establishedYear: z.string().optional(),
@@ -55,7 +57,7 @@ const navigationData: PackageNavigation[] = [
   },
   {
     name: 'Companies / ',
-    link: '/companies'
+    link: '/admin/companies'
   },
   {
     name: 'Add ',
@@ -64,6 +66,9 @@ const navigationData: PackageNavigation[] = [
 ];
 
 const CompanyAddForm = () => {
+
+  const [internal, setInternal] = useState(false);
+  const [success, setSuccess] = useState(false);
 
 
   const router = useRouter();
@@ -77,25 +82,24 @@ const CompanyAddForm = () => {
   console.log(errors)
 
   const submitData = async (data: any) => {
-    console.log(data)
-    try {
-     
-      // const formData = serialize(data)
-      const response = await companyApi.createCompany(data);
-
-      if (response.data.success == true) {
-
-        toast.success('Company Added Successfully.')
-        router.push("/admin/companies");
+      console.log('errors::', errors)
+      try {
+        console.log('data::', data)
+        // const formData = serialize(data)
+        const response = await companyApi.createCompany(data);
+  
+        if (response.data.success == true) {
+  
+          toast.success('Company Added Successfully.')
+          router.push("/admin/companies");
+        }
+    
+      } catch (error: any) {
+        if (error.response.status == 404) {
+          toast.error(error.message)
+        }
       }
-      toast.success('Company Added Successfully.')
-      router.push("/admin/companies");
-    } catch (error: any) {
-      if (error.response.status == 404) {
-        toast.error(error.message)
-      }
-    }
-  };
+    };
 
   return (
     <>
@@ -113,19 +117,52 @@ const CompanyAddForm = () => {
                 </h3>
               </div>
               <div className="flex flex-col gap-5.5 p-6.5">
-                <div>
+               
+              <div>
                   <label className="mb-3 block text-body-sm font-medium text-dark dark:text-white">
-                    Company Id
+                    User Name
                   </label>
                   <input
-                    {...register("companyId")}
+                    {...register("userName")}
                     type="text"
-                    placeholder="Company Id"
+                    placeholder="User Name"
                     className="w-full rounded-[7px] border-[1.5px] border-stroke bg-transparent px-5.5 py-3 text-dark outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-gray-2 dark:border-dark-3 dark:bg-dark-2 dark:text-white dark:focus:border-primary"
                   />
-                  {errors.companyId && (
+                  {errors.userName && (
                     <p className="text-sm text-red-600">
-                      {errors.companyId.message}
+                      {errors.userName.message}
+                    </p>
+                  )}
+                </div>
+                <div>
+                  <label className="mb-3 block text-body-sm font-medium text-dark dark:text-white">
+                    Password
+                  </label>
+                  <input
+                    {...register("password")}
+                    type="text"
+                    placeholder="Password"
+                    className="w-full rounded-[7px] border-[1.5px] border-stroke bg-transparent px-5.5 py-3 text-dark outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-gray-2 dark:border-dark-3 dark:bg-dark-2 dark:text-white dark:focus:border-primary"
+                  />
+                  {errors.password && (
+                    <p className="text-sm text-red-600">
+                      {errors.password.message}
+                    </p>
+                  )}
+                </div>
+                <div>
+                  <label className="mb-3 block text-body-sm font-medium text-dark dark:text-white">
+                  Password
+                  </label>
+                  <input
+                    {...register("passwordd")}
+                    type="text"
+                    placeholder="Password"
+                    className="w-full rounded-[7px] border-[1.5px] border-stroke bg-transparent px-5.5 py-3 text-dark outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-gray-2 dark:border-dark-3 dark:bg-dark-2 dark:text-white dark:focus:border-primary"
+                  />
+                  {errors.passwordd && (
+                    <p className="text-sm text-red-600">
+                      {errors.passwordd.message}
                     </p>
                   )}
                 </div>
@@ -167,17 +204,17 @@ const CompanyAddForm = () => {
 
                 <div>
                   <label className="mb-3 block text-body-sm font-medium text-dark dark:text-white">
-                    Email-Id
+                    Email
                   </label>
                   <input
-                    {...register("email_id")}
+                    {...register("email")}
                     type="email"
-                    placeholder="Email_id"
+                    placeholder="Email"
                     className="w-full rounded-[7px] border-[1.5px] border-stroke bg-transparent px-5.5 py-3 text-dark outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-gray-2 dark:border-dark-3 dark:bg-dark-2 dark:text-white dark:focus:border-primary"
                   />
-                  {errors.email_id && (
+                  {errors.email && (
                     <p className="text-sm text-red-600">
-                      {errors.email_id.message}
+                      {errors.email.message}
                     </p>
                   )}
                 </div>
@@ -257,7 +294,7 @@ const CompanyAddForm = () => {
 
                     <div>
                   <SelectDropdown
-                    data={[{ _id: 1, name: 'india' },{ _id: 2, name: 'uae' }]}
+                    data={[{ name: 'india' },{ name: 'uae' }]}
                     name={" country"}
                     register={register("country")}
                   />

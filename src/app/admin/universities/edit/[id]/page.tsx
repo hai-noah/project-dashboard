@@ -29,7 +29,7 @@ const FormElementsPage = async ({params}:{params:{id:string}}) => {
   const university= response?.data?.university
   return (
     <DefaultLayout>
-      <UniversityEditForm data={university}/>
+      <UniversityEditForm data={university} id={params.id}/>
     </DefaultLayout>
   );
 };

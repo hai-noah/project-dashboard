@@ -29,19 +29,17 @@ import { PackageNavigation } from "@/types/packageNavigation";
 import SelectDropdown from "@/components/FormElements/SelectGroup/SelectDropdownForProduct";
 
 const mySchema = z.object({
-  companyId: z.string().trim().min(1, { message: "Company Id is required." }),
+  userName: z.string().trim().min(1, { message: "User Id is required." }),
+  password: z.string().trim().min(1, { message: "Password is required." }),
+  passwordd: z.string().trim().min(1, { message: "Password is required." }),
   companyName: z.string().trim().min(1, { message: "Company Name is required." }),
   address: z.string().trim().min(1, { message: "Address is required." }),
-  email_id: z.string().trim().min(1, { message: "Email_id is required." }),
+  email: z.string().trim().min(1, { message: "Email is required." }),
   contactNumber: z.string().trim().min(1, { message: "Contact Number is required." }),
   websiteURL: z.string().trim().min(1, { message: "Website URL is required." }),
   establishedYear: z.string().trim().min(1, { message: "Year is required." }),
+  companyLogo:z.any(),
   country: z.string().trim().min(1, { message: "Counrty is required." }),
-  brandDescription: z.string().trim(),
-  companyLogo: z.any().refine((file) => file?.size <= MAX_FILE_SIZE, 'Max image size is 5MB.')
-    .refine(
-      (file) => ACCEPTED_IMAGE_TYPES.includes(file?.type),
-      "Only .jpg, .jpeg, .png and .webp formats are supported."),
 });
 const MAX_FILE_SIZE = 5000000;
 const ACCEPTED_IMAGE_TYPES = ["image/jpeg", "image/jpg", "image/png", "image/webp"];
@@ -55,7 +53,7 @@ const navigationData: PackageNavigation[] = [
   },
   {
     name: 'Companies / ',
-    link: '/companies'
+    link: '/admin/companies'
   },
   {
     name: 'Add ',
@@ -82,30 +80,49 @@ const CompanyEditForm = () => {
   //   }
 
   const {
-    register,
-    handleSubmit,
-    control,
-    formState: { errors, isSubmitting },
-  } = useForm<TMySchema>({ resolver: zodResolver(mySchema) });
-
-  const submitData = async (data: any) => {
-    try {
-      // const formData = serialize(data)
-      // const response = await brandApi.createBrand(formData);
-
-      // if (response.data.success == true) {
-
-      //   toast.success('Brand Added Successfully.')
-      //   router.push("/tables/brands");
-      // }
-      toast.success('Company Edited Successfully.')
-      router.push("/tables/company");
-    } catch (error: any) {
-      if (error.response.status == 404) {
-        toast.error(error.message)
+      register,
+      handleSubmit,
+      control,
+      formState: { errors, isSubmitting },
+    } = useForm<TMySchema>({ resolver: zodResolver(mySchema),
+      defaultValues:{
+        userName:data.userName,
+        password:data.password,
+        passwordd:data.passwordd,
+        companyName:data.universityName,
+        address:data.address,
+        email:data.email,
+        contactNumber:data.contactNumber,
+        websiteURL:data.websiteURL,
+        establishedYear:data.establishedYear;
+        companyLogo : data.companyLogo
+        country:data.country,
+        
       }
-    }
-  };
+     });
+  
+
+
+     const submitData = async (data: any) => {
+      try {
+        console.log('data::', data)
+        // const formData = serialize(data)
+        // const response = await brandApi.createBrand(formData);
+  
+        // if (response.data.success == true) {
+  
+        //   toast.success('Brand Added Successfully.')
+        //   router.push("/tables/brands");
+        // }
+        toast.success('Company Edited Successfully.')
+        router.push("/admin/companies");
+      } catch (error: any) {
+        if (error.response.status == 404) {
+          toast.error(error.message)
+        }
+      }
+    };
+  
 
   return (
     <>
@@ -125,17 +142,49 @@ const CompanyEditForm = () => {
               <div className="flex flex-col gap-5.5 p-6.5">
                 <div>
                   <label className="mb-3 block text-body-sm font-medium text-dark dark:text-white">
-                    Company Id
+                    User Name
                   </label>
                   <input
-                    {...register("companyId")}
+                    {...register("userName")}
                     type="text"
-                    placeholder="Company Id"
+                    placeholder="User Name"
                     className="w-full rounded-[7px] border-[1.5px] border-stroke bg-transparent px-5.5 py-3 text-dark outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-gray-2 dark:border-dark-3 dark:bg-dark-2 dark:text-white dark:focus:border-primary"
                   />
-                  {errors.companyId && (
+                  {errors.userName && (
                     <p className="text-sm text-red-600">
-                      {errors.companyId.message}
+                      {errors.userName.message}
+                    </p>
+                  )}
+                </div>
+                <div>
+                  <label className="mb-3 block text-body-sm font-medium text-dark dark:text-white">
+                    Password
+                  </label>
+                  <input
+                    {...register("password")}
+                    type="text"
+                    placeholder="Password"
+                    className="w-full rounded-[7px] border-[1.5px] border-stroke bg-transparent px-5.5 py-3 text-dark outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-gray-2 dark:border-dark-3 dark:bg-dark-2 dark:text-white dark:focus:border-primary"
+                  />
+                  {errors.password && (
+                    <p className="text-sm text-red-600">
+                      {errors.password.message}
+                    </p>
+                  )}
+                </div>
+                <div>
+                  <label className="mb-3 block text-body-sm font-medium text-dark dark:text-white">
+                  Password
+                  </label>
+                  <input
+                    {...register("passwordd")}
+                    type="text"
+                    placeholder="Password"
+                    className="w-full rounded-[7px] border-[1.5px] border-stroke bg-transparent px-5.5 py-3 text-dark outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-gray-2 dark:border-dark-3 dark:bg-dark-2 dark:text-white dark:focus:border-primary"
+                  />
+                  {errors.passwordd && (
+                    <p className="text-sm text-red-600">
+                      {errors.passwordd.message}
                     </p>
                   )}
                 </div>
@@ -177,17 +226,17 @@ const CompanyEditForm = () => {
 
                 <div>
                   <label className="mb-3 block text-body-sm font-medium text-dark dark:text-white">
-                    Email-Id
+                    Email
                   </label>
                   <input
-                    {...register("email_id")}
+                    {...register("email")}
                     type="email"
-                    placeholder="Email_id"
+                    placeholder="Email"
                     className="w-full rounded-[7px] border-[1.5px] border-stroke bg-transparent px-5.5 py-3 text-dark outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-gray-2 dark:border-dark-3 dark:bg-dark-2 dark:text-white dark:focus:border-primary"
                   />
-                  {errors.email_id && (
+                  {errors.email && (
                     <p className="text-sm text-red-600">
-                      {errors.email_id.message}
+                      {errors.email.message}
                     </p>
                   )}
                 </div>
@@ -247,15 +296,15 @@ const CompanyEditForm = () => {
                 </div>
 
                 <div>
-                  <DropzoneWrapper>
-                    <Typography variant='text-body-sm' fontWeight={500} color="textPrimary" sx={{ mb: 2.5 }}>
-                      Company Logo
+                <DropzoneWrapper>
+                    <Typography fontWeight={500} color="textPrimary" sx={{ mb: 2.5 }}>
+                      University Logo
                       {!!errors.companyLogo && (
                         <span style={{ color: 'red', fontSize: '14px', position: 'absolute', right: '65px' }}>Invalid Image format {!!errors.companyLogo}</span>
                       )}
                     </Typography>
                     <Controller
-                      name='Company Logo'
+                      name='companyLogo'
                       control={control}
                       defaultValue=''
                       render={({ field }) => (
@@ -265,9 +314,9 @@ const CompanyEditForm = () => {
                       )}
                     />
 
-                    <div>
+                  <div>
                   <SelectDropdown
-                    data={[{ _id: 1, name: 'india' },{ _id: 2, name: 'uae' }]}
+                    data={[{ name: 'india' },{ name: 'uae' }]}
                     name={" country"}
                     register={register("country")}
                   />

@@ -3,7 +3,7 @@ import { axiosClient } from "./config/axiosConfig";
 export const companyApi = {
   createCompany: async function (body: any) {
     return await axiosClient.post(
-      "companies",
+      "companies/",
       body
     //   {
     //     headers: {
@@ -16,11 +16,11 @@ export const companyApi = {
     return await axiosClient.put(
       `companies/update/${companyId}`,
       body,
-      {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-      },
+      // {
+      //   headers: {
+      //     "Content-Type": "multipart/form-data",
+      //   },
+      // },
     );
   },
   deleteCompany: async function (companyId: any, body: any) {
