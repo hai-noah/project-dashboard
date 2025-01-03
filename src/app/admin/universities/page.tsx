@@ -1,8 +1,6 @@
 import Breadcrumb from "@/components/Breadcrumbs/Breadcrumb";
 import { Metadata } from "next";
 import DefaultLayout from "@/components/Layouts/DefaultLaout";
-import BrandTable from "@/components/Tables/Brand";
-import { brandApi } from "@/api/brandApi";
 import toast from "react-hot-toast";
 import { PackageNavigation } from "@/types/packageNavigation";
 import UniversityTable from "@/components/Tables/university";
@@ -20,7 +18,7 @@ const packageData: PackageNavigation[] = [
   },
   {
     name:'Universities ',
-    link:'/universities'
+    link:'/admin/universities'
   },
 ];
 
