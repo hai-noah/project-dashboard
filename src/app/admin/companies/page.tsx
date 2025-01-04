@@ -26,7 +26,7 @@ const packageData: PackageNavigation[] = [
 async function getAllCompany() {
 try {
   const response = await companyApi.getAllCompany();
-  console.log('heyyy',response.data)
+ 
   return response.data;
 } catch (error:any) {
   console.log(error)

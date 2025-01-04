@@ -27,7 +27,7 @@ const FormElementsPage = async ({params}:{params:{id:string}}) => {
   const company= response?.data?.company
   return (
     <DefaultLayout>
-      <CompanyEditForm/>
+      <CompanyEditForm  data={company} id={params.id}/>
     </DefaultLayout>
   );
 };

@@ -17,21 +17,21 @@ const UniversityTable = ({ listOfUniversity: listOfUniversity }: Props) => {
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 5;
 
-  const filteredBrands = listOfUniversity.filter((brandItem: any) =>
-    brandItem.universityName.toLowerCase().includes(searchTerm.toLowerCase()),
-  );
+  // const filteredBrands = listOfUniversity.filter((brandItem: any) =>
+  //   brandItem.universityName.toLowerCase().includes(searchTerm.toLowerCase()),
+  // );
 
-  const totalPages = Math.ceil(filteredBrands.length / itemsPerPage);
-  const brandData = filteredBrands.slice(
-    (currentPage - 1) * itemsPerPage,
-    currentPage * itemsPerPage,
-  );
+  // const totalPages = Math.ceil(filteredBrands.length / itemsPerPage);
+  // const brandData = filteredBrands.slice(
+  //   (currentPage - 1) * itemsPerPage,
+  //   currentPage * itemsPerPage,
+  // );
 
-  const handlePageChange = (pageNumber: number) => {
-    if (pageNumber >= 1 && pageNumber <= totalPages) {
-      setCurrentPage(pageNumber);
-    }
-  };
+  // const handlePageChange = (pageNumber: number) => {
+  //   if (pageNumber >= 1 && pageNumber <= totalPages) {
+  //     setCurrentPage(pageNumber);
+  //   }
+  // };
 
   const router = useRouter();
   // router.refresh();
@@ -47,6 +47,7 @@ const UniversityTable = ({ listOfUniversity: listOfUniversity }: Props) => {
       }
     } catch (error: any) {
       toast.error(error.response.data.message);
+      console.log(error)
     }
   }
 

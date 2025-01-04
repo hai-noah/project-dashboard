@@ -103,9 +103,7 @@ const CompanyTable = ({ listOfCompany: listOfCompany }: Props) => {
               <table className="w-full ">
                 <thead>
                   <tr className="bg-[#F7F9FC] text-left dark:bg-dark-2">
-                    <th className="min-w-[150px] px-4 py-4 font-medium text-dark dark:text-white">
-                    Company ID
-                    </th>
+                
                     <th className="min-w-[150px] px-4 py-4 font-medium text-dark dark:text-white">
                       Company Name
                     </th>
@@ -127,16 +125,7 @@ const CompanyTable = ({ listOfCompany: listOfCompany }: Props) => {
                 <tbody>
                   {listOfCompany.map((packageItem: any, index:number) => (
                     <tr key={index}>
-                      <td
-                        className={`border-[#eee] px-4 py-4 dark:border-dark-3 xl:pl-7.5 ${index === packageItem.length - 1 ? "border-b-0" : "border-b"}`}
-                      >
-                        <h5 className="text-dark dark:text-white">
-                          {packageItem._id}
-                        </h5>
-                        {/* <p className="mt-[3px] text-body-sm font-medium">
-                    ${packageItem.price}
-                  </p> */}
-                      </td>
+                     
                       <td
                         className={`border-[#eee] px-4 py-4 dark:border-dark-3 ${index === packageItem.length - 1 ? "border-b-0" : "border-b"}`}
                       >
@@ -148,7 +137,7 @@ const CompanyTable = ({ listOfCompany: listOfCompany }: Props) => {
                         className={`border-[#eee] px-4 py-4 dark:border-dark-3 ${index === packageItem.length - 1 ? "border-b-0" : "border-b"}`}
                       >
                         <p className="text-dark dark:text-white">
-                          {packageItem.year}
+                          {packageItem.establishedYear}
                         </p>
                       </td>
                       <td
@@ -165,6 +154,7 @@ const CompanyTable = ({ listOfCompany: listOfCompany }: Props) => {
                           {packageItem.status}
                         </p>
                       </td>
+                  
                       <td
                         className={`border-[#eee] px-4 py-4 dark:border-dark-3 ${index === packageItem.length - 1 ? "border-b-0" : "border-b"}`}
                       ></td>

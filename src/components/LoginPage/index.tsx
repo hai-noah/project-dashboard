@@ -26,16 +26,16 @@ const LoginPage = () => {
   } = useForm<TMySchema>({ resolver: zodResolver(mySchema) });
   const submitData = async (data: any) => {
     try {
-      router.push("/admin/companies");
+
       const response = await adminApi.adminLogin(data);
       if (response.data.success) {
         // window.localStorage.setItem("accessToken", response.data.accessToken);  //Storing access token to the local storage
         // Cookies.set("accessToken", response.data.accessToken);   //Storing access token to the browser cookies
-     
-        router.refresh();
+
+  
         toast.success(response.data.message);
+        router.push("/admin/companies");
       }
-      toast.error(response.data.message);
     } catch (error: any) {
       toast.error(error.message);
     }

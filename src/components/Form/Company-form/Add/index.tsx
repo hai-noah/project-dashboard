@@ -27,11 +27,11 @@ import FileUploaderSingle from "@/components/file-upload/singleFileUpload";
 import { PackageNavigation } from "@/types/packageNavigation";
 import SelectDropdown from "@/components/FormElements/SelectGroup/SelectDropdownForProduct";
 import { companyApi } from "@/api/companyApi";
+import DatePicker from "react-datepicker";
 
 const mySchema = z.object({
   userName: z.string().trim().min(1, { message: "User Id is required." }),
   password: z.string().trim().min(1, { message: "Password is required." }),
-  passwordd: z.string().trim().min(1, { message: "Password is required." }),
   companyName: z.string().trim().min(1, { message: "Company Name is required." }),
   address: z.string().trim().min(1, { message: "Address is required." }),
   email: z.string().trim().min(1, { message: "Email is required." }),
@@ -39,11 +39,11 @@ const mySchema = z.object({
   websiteURL: z.string().trim().min(1, { message: "Website URL is required." }),
   establishedYear: z.string().optional(),
   country: z.string().trim().min(1, { message: "Counrty is required." }),
-  companyLogo:z.any(),
-  // companyLogo: z.any().refine((file) => file?.size <= MAX_FILE_SIZE, 'Max image size is 5MB.')
-  //   .refine(
-  //     (file) => ACCEPTED_IMAGE_TYPES.includes(file?.type),
-  //     "Only .jpg, .jpeg, .png and .webp formats are supported."),
+  // companyLogo:z.any(),
+  companyLogo: z.any().refine((file) => file?.size <= MAX_FILE_SIZE, 'Max image size is 5MB.')
+    .refine(
+      (file) => ACCEPTED_IMAGE_TYPES.includes(file?.type),
+      "Only .jpg, .jpeg, .png and .webp formats are supported."),
 });
 const MAX_FILE_SIZE = 5000000;
 const ACCEPTED_IMAGE_TYPES = ["image/jpeg", "image/jpg", "image/png", "image/webp"];
@@ -82,24 +82,24 @@ const CompanyAddForm = () => {
   console.log(errors)
 
   const submitData = async (data: any) => {
-      console.log('errors::', errors)
-      try {
-        console.log('data::', data)
-        // const formData = serialize(data)
-        const response = await companyApi.createCompany(data);
-  
-        if (response.data.success == true) {
-  
-          toast.success('Company Added Successfully.')
-          router.push("/admin/companies");
-        }
-    
-      } catch (error: any) {
-        if (error.response.status == 404) {
-          toast.error(error.message)
-        }
+    console.log('errors::', errors)
+    try {
+      console.log('data::', data)
+      // const formData = serialize(data)
+      const response = await companyApi.createCompany(data);
+
+      if (response.data.success == true) {
+
+        toast.success('Company Added Successfully.')
+        router.push("/admin/companies");
       }
-    };
+
+    } catch (error: any) {
+
+      toast.error(error.message)
+
+    }
+  };
 
   return (
     <>
@@ -117,8 +117,8 @@ const CompanyAddForm = () => {
                 </h3>
               </div>
               <div className="flex flex-col gap-5.5 p-6.5">
-               
-              <div>
+
+                <div>
                   <label className="mb-3 block text-body-sm font-medium text-dark dark:text-white">
                     User Name
                   </label>
@@ -150,22 +150,7 @@ const CompanyAddForm = () => {
                     </p>
                   )}
                 </div>
-                <div>
-                  <label className="mb-3 block text-body-sm font-medium text-dark dark:text-white">
-                  Password
-                  </label>
-                  <input
-                    {...register("passwordd")}
-                    type="text"
-                    placeholder="Password"
-                    className="w-full rounded-[7px] border-[1.5px] border-stroke bg-transparent px-5.5 py-3 text-dark outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-gray-2 dark:border-dark-3 dark:bg-dark-2 dark:text-white dark:focus:border-primary"
-                  />
-                  {errors.passwordd && (
-                    <p className="text-sm text-red-600">
-                      {errors.passwordd.message}
-                    </p>
-                  )}
-                </div>
+
 
                 <div>
                   <label className="mb-3 block text-body-sm font-medium text-dark dark:text-white">
@@ -258,12 +243,16 @@ const CompanyAddForm = () => {
                   <label className="mb-3 block text-body-sm font-medium text-dark dark:text-white">
                     Established Year
                   </label>
-                  <DatePickerOne />
-
-                  {/* <input
-                    {...register("Established Year")}
-                    type="calendar"
+                  <input
+                    {...register("establishedYear")}
+                    type="text"
                     placeholder="Established Year"
+                    className="w-full rounded-[7px] border-[1.5px] border-stroke bg-transparent px-5.5 py-3 text-dark outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-gray-2 dark:border-dark-3 dark:bg-dark-2 dark:text-white dark:focus:border-primary"
+                  />
+                  {/* <input
+                    {...register("establishedYear")}
+                    type="calendar"
+                    placeholder="Issue Date"
                     className="w-full rounded-[7px] border-[1.5px] border-stroke bg-transparent px-5.5 py-3 text-dark outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-gray-2 dark:border-dark-3 dark:bg-dark-2 dark:text-white dark:focus:border-primary"
                   /> */}
                   {errors.establishedYear && (
@@ -293,21 +282,21 @@ const CompanyAddForm = () => {
                     />
 
                     <div>
-                  <SelectDropdown
-                    data={[{ name: 'india' },{ name: 'uae' }]}
-                    name={" country"}
-                    register={register("country")}
-                  />
-                  {errors.country && (
-                    <p className="text-sm text-red-600">
-                      {errors.country.message}
-                    </p>
-                  )}
-                </div>
+                      <SelectDropdown
+                        data={[{ name: 'india' }, { name: 'uae' }]}
+                        name={" country"}
+                        register={register("country")}
+                      />
+                      {errors.country && (
+                        <p className="text-sm text-red-600">
+                          {errors.country.message}
+                        </p>
+                      )}
+                    </div>
 
-                   
 
-                   
+
+
 
                   </DropzoneWrapper>
                   {/* <label className="mb-3 block text-body-sm font-medium text-dark dark:text-white">

@@ -27,11 +27,11 @@ import { Typography } from "@mui/material";
 import FileUploaderSingle from "@/components/file-upload/singleFileUpload";
 import { PackageNavigation } from "@/types/packageNavigation";
 import SelectDropdown from "@/components/FormElements/SelectGroup/SelectDropdownForProduct";
+import { companyApi } from "@/api/companyApi";
 
 const mySchema = z.object({
   userName: z.string().trim().min(1, { message: "User Id is required." }),
   password: z.string().trim().min(1, { message: "Password is required." }),
-  passwordd: z.string().trim().min(1, { message: "Password is required." }),
   companyName: z.string().trim().min(1, { message: "Company Name is required." }),
   address: z.string().trim().min(1, { message: "Address is required." }),
   email: z.string().trim().min(1, { message: "Email is required." }),
@@ -61,8 +61,8 @@ const navigationData: PackageNavigation[] = [
   },
 ];
 
-const CompanyEditForm = () => {
-
+const CompanyEditForm = ({data,id}:any) => {
+console.log(data)
   const [internal, setInternal] = useState(false);
   const [success, setSuccess] = useState(false);
 
@@ -86,17 +86,16 @@ const CompanyEditForm = () => {
       formState: { errors, isSubmitting },
     } = useForm<TMySchema>({ resolver: zodResolver(mySchema),
       defaultValues:{
-        userName:data.userName,
-        password:data.password,
-        passwordd:data.passwordd,
-        companyName:data.universityName,
-        address:data.address,
-        email:data.email,
-        contactNumber:data.contactNumber,
-        websiteURL:data.websiteURL,
-        establishedYear:data.establishedYear;
-        companyLogo : data.companyLogo
-        country:data.country,
+        userName:data?.userName,
+        password:data?.password,
+        companyName:data?.companyName,
+        address:data?.address,
+        email:data?.email,
+        contactNumber:data?.contactNumber,
+        websiteURL:data?.websiteURL,
+        establishedYear:data?.establishedYear,
+        companyLogo : data?.companyLogo,
+        country:data?.country,
         
       }
      });
@@ -107,13 +106,10 @@ const CompanyEditForm = () => {
       try {
         console.log('data::', data)
         // const formData = serialize(data)
-        // const response = await brandApi.createBrand(formData);
-  
-        // if (response.data.success == true) {
-  
-        //   toast.success('Brand Added Successfully.')
-        //   router.push("/tables/brands");
-        // }
+       const response = await companyApi.updateCompany(id,data);
+       
+      // if (response.data.success == true) {
+
         toast.success('Company Edited Successfully.')
         router.push("/admin/companies");
       } catch (error: any) {
@@ -172,22 +168,7 @@ const CompanyEditForm = () => {
                     </p>
                   )}
                 </div>
-                <div>
-                  <label className="mb-3 block text-body-sm font-medium text-dark dark:text-white">
-                  Password
-                  </label>
-                  <input
-                    {...register("passwordd")}
-                    type="text"
-                    placeholder="Password"
-                    className="w-full rounded-[7px] border-[1.5px] border-stroke bg-transparent px-5.5 py-3 text-dark outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-gray-2 dark:border-dark-3 dark:bg-dark-2 dark:text-white dark:focus:border-primary"
-                  />
-                  {errors.passwordd && (
-                    <p className="text-sm text-red-600">
-                      {errors.passwordd.message}
-                    </p>
-                  )}
-                </div>
+              
 
                 <div>
                   <label className="mb-3 block text-body-sm font-medium text-dark dark:text-white">
@@ -278,16 +259,14 @@ const CompanyEditForm = () => {
 
                 <div>
                   <label className="mb-3 block text-body-sm font-medium text-dark dark:text-white">
-                    Established Year
+                  Established Year
                   </label>
-                  <DatePickerOne />
-
-                  {/* <input
-                    {...register("Established Year")}
-                    type="calendar"
+                  <input
+                    {...register("establishedYear")}
+                    type="text"
                     placeholder="Established Year"
                     className="w-full rounded-[7px] border-[1.5px] border-stroke bg-transparent px-5.5 py-3 text-dark outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-gray-2 dark:border-dark-3 dark:bg-dark-2 dark:text-white dark:focus:border-primary"
-                  /> */}
+                  />
                   {errors.establishedYear && (
                     <p className="text-sm text-red-600">
                       {errors.establishedYear.message}
