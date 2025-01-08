@@ -123,7 +123,7 @@ const CompanyTable = ({ listOfCompany: listOfCompany }: Props) => {
                   </tr>
                 </thead>
                 <tbody>
-                  {listOfCompany.map((packageItem: any, index:number) => (
+                  {listOfCompany?.map((packageItem: any, index:number) => (
                     <tr key={index}>
                      
                       <td

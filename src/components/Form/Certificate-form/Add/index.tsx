@@ -37,7 +37,10 @@ const mySchema = z.object({
   universityName: z.string().trim().min(1, { message: "University Name is required." }),
   courseDuration: z.string().trim().min(1, { message: "Course Duration is required." }), 
   affiliationNumber: z.string().trim().min(1, { message: "Affiliation Number is required." }),
-  universityLogo: z.any(),
+  universityLogo:  z.any().refine((file) => file?.size <= MAX_FILE_SIZE, 'Max image size is 5MB.')
+      .refine(
+        (file) => ACCEPTED_IMAGE_TYPES.includes(file?.type),
+        "Only .jpg, .jpeg, .png and .webp formats are supported."),
   
   // establishedYear: z.string().trim().min(1, { message: "Year is required." }),
   // country: z.string().trim().min(1, { message: "Counrty is required." }),
@@ -167,9 +170,26 @@ const CertificateAddForm = () => {
                   )}
                 </div>
 
+                <div>
+                  <label className="mb-3 block text-body-sm font-medium text-dark dark:text-white">
+                  Issue Date
+                  </label>
+                  <input
+                    {...register("issueDate")}
+                    type="text"
+                    placeholder="Issue Date"
+                    className="w-full rounded-[7px] border-[1.5px] border-stroke bg-transparent px-5.5 py-3 text-dark outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-gray-2 dark:border-dark-3 dark:bg-dark-2 dark:text-white dark:focus:border-primary"
+                  />
+                  {errors.issueDate && (
+                    <p className="text-sm text-red-600">
+                      {errors.issueDate.message}
+                    </p>
+                  )}
+                </div>
+
 
                
-                <div>
+                {/* <div>
                   <label className="mb-3 block text-body-sm font-medium text-dark dark:text-white">
                     Issue Date
                   </label>
@@ -181,12 +201,12 @@ const CertificateAddForm = () => {
                     placeholder="Issue Date"
                     className="w-full rounded-[7px] border-[1.5px] border-stroke bg-transparent px-5.5 py-3 text-dark outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-gray-2 dark:border-dark-3 dark:bg-dark-2 dark:text-white dark:focus:border-primary"
                   /> */}
-                  {errors.issueDate && (
+                  {/* {errors.issueDate && (
                     <p className="text-sm text-red-600">
                       {errors.issueDate.message}
                     </p>
                   )}
-                </div>
+                </div> */} 
 
 
                 <div>

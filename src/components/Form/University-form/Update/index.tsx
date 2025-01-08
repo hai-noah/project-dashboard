@@ -41,11 +41,11 @@ const mySchema = z.object({
   accreditationStatus: z.string().trim().min(1, { message: "Status is required." }),
   country: z.string().trim().min(1, { message: "Counrty is required." }),
   deanDirectorName: z.string().trim().min(1, { message: "Name is required." }),
-  universityLogo: z.any()
-  // universityLogo: z.any().refine((file) => file?.size <= MAX_FILE_SIZE, 'Max image size is 5MB.')
-  //   .refine(
-  //     (file) => ACCEPTED_IMAGE_TYPES.includes(file?.type),
-  //     "Only .jpg, .jpeg, .png and .webp formats are supported."),
+ // universityLogo: z.any(),
+  universityLogo: z.any().refine((file) => file?.size <= MAX_FILE_SIZE, 'Max image size is 5MB.')
+    .refine(
+      (file) => ACCEPTED_IMAGE_TYPES.includes(file?.type),
+      "Only .jpg, .jpeg, .png and .webp formats are supported."),
 });
 const MAX_FILE_SIZE = 5000000;
 const ACCEPTED_IMAGE_TYPES = ["image/jpeg", "image/jpg", "image/png", "image/webp"];
@@ -101,9 +101,10 @@ const UniversityEditForm = ({data,id}:any) => {
       websiteURL:data.websiteURL,
       establishedYear:data.establishedYear,
       accreditationStatus:data.accreditationStatus,
+      universityLogo:data.universityLogo,
       country:data.country,
       deanDirectorName:data.deanDirectorName,
-      universityLogo:data.deanDirectorName,
+     
 
     }
    });

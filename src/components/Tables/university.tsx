@@ -107,9 +107,9 @@ const UniversityTable = ({ listOfUniversity: listOfUniversity }: Props) => {
                     <th className="min-w-[150px] px-4 py-4 font-medium text-dark dark:text-white">
                       University Name
                     </th>
-                    {/* <th className="min-w-[150px] px-4 py-4 font-medium text-dark dark:text-white">
+                    <th className="min-w-[150px] px-4 py-4 font-medium text-dark dark:text-white">
                     Established Year
-                    </th> */}
+                    </th>
                     <th className="min-w-[150px] px-4 py-4 font-medium text-dark dark:text-white">
                       Country
                     </th>
@@ -139,30 +139,23 @@ const UniversityTable = ({ listOfUniversity: listOfUniversity }: Props) => {
                         className={`border-[#eee] px-4 py-4 dark:border-dark-3 ${index === packageItem.length - 1 ? "border-b-0" : "border-b"}`}
                       >
                         <p className="text-dark dark:text-white">
+                          {packageItem.establishedYear}
+                        </p>
+                      </td>
+                      <td
+                        className={`border-[#eee] px-4 py-4 dark:border-dark-3 ${index === packageItem.length - 1 ? "border-b-0" : "border-b"}`}
+                      >
+                        <p className="text-dark dark:text-white">
                           {packageItem.country}
                         </p>
                       </td>
-                      {/* <td
-                        className={`border-[#eee] px-4 py-4 dark:border-dark-3 ${index === packageItem.length - 1 ? "border-b-0" : "border-b"}`}
-                      >
-                        <p className="text-dark dark:text-white">
-                          {packageItem.year}
-                        </p>
-                      </td> */}
-                      {/* <td
-                        className={`border-[#eee] px-4 py-4 dark:border-dark-3 ${index === packageItem.length - 1 ? "border-b-0" : "border-b"}`}
-                      >
-                        <p className="text-dark dark:text-white">
-                          {packageItem.country}
-                        </p>
-                      </td> */}
-                      {/* <td
+                      <td
                         className={`border-[#eee] px-4 py-4 dark:border-dark-3 ${index === packageItem.length - 1 ? "border-b-0" : "border-b"}`}
                       >
                         <p className="text-dark dark:text-white">
                           {packageItem.status}
                         </p>
-                      </td> */}
+                      </td>
                       <td
                         className={`border-[#eee] px-4 py-4 dark:border-dark-3 ${index === packageItem.length - 1 ? "border-b-0" : "border-b"}`}
                       ></td>
