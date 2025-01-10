@@ -1,10 +1,10 @@
 "use client";
-import { brandApi } from "@/api/brandApi";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { toast } from "react-hot-toast";
 import Delete from "@/components/Confirmation/Delete";
+import { certificateApi } from "@/api/certificateApi";
 
 type Props = {
   listOfCertificate: [];
@@ -35,9 +35,9 @@ const CertificateTable = ({ listOfCertificate: listOfCertificate }: Props) => {
   const router = useRouter();
   // router.refresh();
 
-  async function deleteBrand(id: any) {
+async function deleteCertificate(id: any) {
     try {
-      const responseDelete = await brandApi.deleteBrand(id);
+      const responseDelete = await certificateApi.deleteCertificate(id);
       console.log("first", responseDelete.data.response);
 
       if (responseDelete.data.success == true) {
@@ -48,7 +48,6 @@ const CertificateTable = ({ listOfCertificate: listOfCertificate }: Props) => {
       toast.error(error.response.data.message);
     }
   }
-
   return (
     <>
       <div className="rounded-[10px] border border-stroke bg-white py-4 shadow-1 dark:border-dark-3 dark:bg-gray-dark dark:shadow-card sm:py-7.5">
@@ -105,9 +104,9 @@ const CertificateTable = ({ listOfCertificate: listOfCertificate }: Props) => {
                     <th className="min-w-[150px] px-4 py-4 font-medium text-dark dark:text-white">
                     Certificate Number
                     </th>
-                    <th className="min-w-[220px] px-4 py-4 font-medium text-dark dark:text-white">
+                    {/* <th className="min-w-[220px] px-4 py-4 font-medium text-dark dark:text-white">
                       Student ID
-                    </th>
+                    </th> */}
                     <th className="min-w-[150px] px-4 py-4 font-medium text-dark dark:text-white">
                     Student Name
                     </th>
@@ -132,19 +131,12 @@ const CertificateTable = ({ listOfCertificate: listOfCertificate }: Props) => {
                       <td
                         className={`border-[#eee] px-4 py-4 dark:border-dark-3 xl:pl-7.5 ${index === packageItem.length - 1 ? "border-b-0" : "border-b"}`}
                       >
-                        <h5 className="text-dark dark:text-white">
-                          {packageItem.certificateNumber}
-                        </h5>
+                        <h6 className="text-dark dark:text-white">
+                          {packageItem.certificateName}
+                        </h6>
                         {/* <p className="mt-[3px] text-body-sm font-medium">
                     ${packageItem.price}
                   </p> */}
-                      </td>
-                      <td
-                        className={`border-[#eee] px-4 py-4 dark:border-dark-3 ${index === packageItem.length - 1 ? "border-b-0" : "border-b"}`}
-                      >
-                        <p className="text-dark dark:text-white">
-                          {packageItem.studentId}
-                        </p>
                       </td>
                       <td
                         className={`border-[#eee] px-4 py-4 dark:border-dark-3 ${index === packageItem.length - 1 ? "border-b-0" : "border-b"}`}
@@ -199,7 +191,7 @@ const CertificateTable = ({ listOfCertificate: listOfCertificate }: Props) => {
                           >
                             {itemId === packageItem._id && (
                               <Delete
-                                deleteId={deleteBrand}
+                                deleteId={deleteCertificate}
                                 id={packageItem._id}
                                 isOpen={itemId === packageItem._id}
                                 setIsOpen={setItemId}

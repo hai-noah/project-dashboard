@@ -33,11 +33,13 @@ const mySchema = z.object({
   studentId: z.string().trim().min(1, { message: "Student ID is required." }),
   studentName: z.string().trim().min(1, { message: "Student Name is required." }),
   issueDate: z.string().trim().optional(), 
+  courseName: z.string().trim().min(1, { message: "Course Name is required." }),
   collegeName: z.string().trim().min(1, { message: "College Name is required." }), 
   universityName: z.string().trim().min(1, { message: "University Name is required." }),
   courseDuration: z.string().trim().min(1, { message: "Course Duration is required." }), 
   affiliationNumber: z.string().trim().min(1, { message: "Affiliation Number is required." }),
-  universityLogo:  z.any().refine((file) => file?.size <= MAX_FILE_SIZE, 'Max image size is 5MB.')
+  // universityLogo: z.any(),
+    universityLogo: z.any().refine((file) => file?.size <= MAX_FILE_SIZE, 'Max image size is 5MB.')
       .refine(
         (file) => ACCEPTED_IMAGE_TYPES.includes(file?.type),
         "Only .jpg, .jpeg, .png and .webp formats are supported."),
@@ -62,7 +64,7 @@ const navigationData: PackageNavigation[] = [
   },
   {
     name: 'Certificates / ',
-    link: '/certificate'
+    link: '/university-admin/certificate'
   },
   {
     name: 'Add ',
@@ -71,6 +73,9 @@ const navigationData: PackageNavigation[] = [
 ];
 
 const CertificateAddForm = () => {
+
+  const [internal, setInternal] = useState(false);
+  const [success, setSuccess] = useState(false);
 
 
   const router = useRouter();
@@ -84,6 +89,7 @@ const CertificateAddForm = () => {
   console.log(errors)
 
   const submitData = async (data: any) => {
+    console.log('errors::', errors)
     try {
       console.log('data::', data)
       // const formData = serialize(data)
@@ -92,17 +98,15 @@ const CertificateAddForm = () => {
       if (response.data.success == true) {
 
         toast.success('Certificate Added Successfully.')
-        router.push("/certificate");
+        router.push("/university-admin/certificate");
       }
-      toast.success('Certificat Added Successfully.')
-      router.push("/certificate");
+
     } catch (error: any) {
-      if (error.response.status == 404) {
-        toast.error(error.message)
-      }
+
+      toast.error(error.message)
+
     }
   };
-
   return (
     <>
 
@@ -166,6 +170,22 @@ const CertificateAddForm = () => {
                   {errors.studentName && (
                     <p className="text-sm text-red-600">
                       {errors.studentName.message}
+                    </p>
+                  )}
+                </div>
+                <div>
+                  <label className="mb-3 block text-body-sm font-medium text-dark dark:text-white">
+                    Course Name
+                  </label>
+                  <input
+                    {...register("courseName")}
+                    type="text"
+                    placeholder="Course Name"
+                    className="w-full rounded-[7px] border-[1.5px] border-stroke bg-transparent px-5.5 py-3 text-dark outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-gray-2 dark:border-dark-3 dark:bg-dark-2 dark:text-white dark:focus:border-primary"
+                  />
+                  {errors.courseName && (
+                    <p className="text-sm text-red-600">
+                      {errors.courseName.message}
                     </p>
                   )}
                 </div>
@@ -276,27 +296,26 @@ const CertificateAddForm = () => {
                     </p>
                   )}
                 </div>
-
-               
-
                 <div>
                   <DropzoneWrapper>
-                    {/* <Typography variant='text-body-sm' fontWeight={500} color="textPrimary" sx={{ mb: 2.5 }}>
+                    <Typography fontWeight={500} color="textPrimary" sx={{ mb: 2.5 }}>
                       University Logo
                       {!!errors.universityLogo && (
                         <span style={{ color: 'red', fontSize: '14px', position: 'absolute', right: '65px' }}>Invalid Image format {!!errors.universityLogo}</span>
-                      )} */}
-                    {/* </Typography>
+                      )}
+                    </Typography>
                     <Controller
-                      name='University Logo'
+                      name='universityLogo'
                       control={control}
                       defaultValue=''
-                      render={({ field }) => ( */}
-                        {/* <div>
+                      render={({ field }) => (
+                        <div>
                           <FileUploaderSingle file={field.value} setFile={field.onChange} error={errors.universityLogo} />
                         </div>
                       )}
-                    /> */}
+                    />
+
+                   
 
                    
 
@@ -329,5 +348,8 @@ const CertificateAddForm = () => {
     </>
   );
 };
+
+
+               
 
 export default CertificateAddForm;

@@ -305,7 +305,7 @@ const UniversityEditForm = ({data,id}:any) => {
                     <Controller
                       name='universityLogo'
                       control={control}
-                      defaultValue=''
+              
                       render={({ field }) => (
                         <div>
                           <FileUploaderSingle file={field.value} setFile={field.onChange} error={errors.universityLogo} />

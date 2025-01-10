@@ -5,23 +5,23 @@ export const universityApi = {
     console.log(body)
     return await axiosClient.post(
       "universities/",
-      body
-    //   {
-    //     headers: {
-    //       "Content-Type": "multipart/form-data",
-    //     },
-    //   },
+      body,
+      {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      },
     );
   },
   updateUniversity: async function (universityId: any, body: any) {
     return await axiosClient.put(
       `universities/update/${universityId}`,
       body,
-      // {
-      //   headers: {
-      //     "Content-Type": "multipart/form-data",
-      //   },
-      // },
+      {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      },
     );
   },
   deleteUniversity: async function (universityId: any) {

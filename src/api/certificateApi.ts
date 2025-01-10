@@ -24,15 +24,12 @@ export const certificateApi = {
       },
     );
   },
-  deleteCertificate: async function (certificateId: any, body: any) {
+  deleteCertificate: async function (certificateId: any) {
     return await axiosClient.put(
       `certificates/delete/${certificateId}`,
-      body,
-      {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-      },
+    
+      
+      
     );
   },
   viewCertificate: async function (certificateId: any, body: any) {
