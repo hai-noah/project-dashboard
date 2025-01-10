@@ -2,8 +2,8 @@ import Breadcrumb from "@/components/Breadcrumbs/Breadcrumb";
 import { Metadata } from "next";
 import DefaultLayout from "@/components/Layouts/DefaultLaout";
 import { PackageNavigation } from "@/types/packageNavigation";
-import CertificateTable from "@/components/Tables/Certificate";
-import { certificateApi } from "@/api/certificateApi";
+import VerificationTable from "@/components/Tables/Verification";
+import { companyApi } from "@/api/companyApi";
 
 export const metadata: Metadata = {
   title: "Next.js Tables Page | NextAdmin - Next.js Dashboard Kit",
@@ -16,37 +16,36 @@ const packageData: PackageNavigation[] = [
     link:'/'
   },
   {
-    name:'Certificates ',
-    link:'/tables/certificate'
+    name:'univ ',
+    link:'/tables/Verification'
   },
 ];
 
-async function getAllCertificate() {
-try {
-  const response = await certificateApi.getAllCertificate();
-  return response.data;
-} catch (error:any) {
-  console.log(error)
-  // toast.error(error.message)
-}}
+// async function getAllCompany() {
+// try {
+//   const response = await companyApi.getAllCompany();
+ 
+//   return response.data;
+// } catch (error:any) {
+//   console.log(error)
+//   // toast.error(error.message)
+// }}
 
-
-const certificates = [{
+const verification = [{
   name:'hello'
 }];
 
 const TablesPage = async () => {
 
-  // const response = await getAllCertificate()
-  // const certificates = response?.data?.certificate
+  // const response = await getAllCompany()
+  // const univ = response?.data?.univ
 
-
-  
+   
   return (
     <DefaultLayout>
-      <Breadcrumb pageName="Certificates" navigation={packageData}/>
+      <Breadcrumb pageName="univ" navigation={packageData}/>
       <div className="flex flex-col gap-10">
-        <CertificateTable listOfCertificate={certificates}/>
+        <VerificationTable listOfVerification={verification}/>
       </div>
     </DefaultLayout>
   );

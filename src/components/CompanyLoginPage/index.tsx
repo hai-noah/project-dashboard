@@ -16,7 +16,7 @@ const mySchema = z.object({
 
 type TMySchema = z.infer<typeof mySchema>;
 
-const LoginPage = () => {
+const CompanyLoginPage = () => {
   const router = useRouter();
 
   const {
@@ -27,15 +27,16 @@ const LoginPage = () => {
   const submitData = async (data: any) => {
     try {
 
-      const response = await adminApi.adminLogin(data);
+      const response = await adminApi.CompanyAdminLogin(data);
       if (response.data.success) {
+        router.push("/admin/universities");
         // window.localStorage.setItem("accessToken", response.data.accessToken);  //Storing access token to the local storage
         // Cookies.set("accessToken", response.data.accessToken);   //Storing access token to the browser cookies
 
-  
+        router.refresh();
         toast.success(response.data.message);
-        router.push("/admin/companies");
       }
+     
     } catch (error: any) {
       toast.error(error.message);
     }
@@ -152,4 +153,4 @@ const LoginPage = () => {
   );
 };
 
-export default LoginPage;
+export default CompanyLoginPage;

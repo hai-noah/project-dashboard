@@ -7,7 +7,7 @@ import Delete from "@/components/Confirmation/Delete";
 import { certificateApi } from "@/api/certificateApi";
 
 type Props = {
-  listOfCertificate: [];
+  listOfCertificate: any;
 };
 
 const CertificateTable = ({ listOfCertificate: listOfCertificate }: Props) => {
@@ -126,7 +126,7 @@ async function deleteCertificate(id: any) {
                   </tr>
                 </thead>
                 <tbody>
-                  {listOfCertificate.map((packageItem: any, index:number) => (
+                  {listOfCertificate?.map((packageItem: any, index:number) => (
                     <tr key={index}>
                       <td
                         className={`border-[#eee] px-4 py-4 dark:border-dark-3 xl:pl-7.5 ${index === packageItem.length - 1 ? "border-b-0" : "border-b"}`}

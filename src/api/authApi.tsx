@@ -7,9 +7,15 @@ export const adminApi = {
       body,
     );
   },
-  universityAdminLogin: async function (body: any) {
+  UniversityAdminLogin: async function (body: any) {
     return await axios.post(
       "http://localhost:5000/api/dashboard/university-auth/login",
+      body,
+    );
+  },
+  CompanyAdminLogin: async function (body: any) {
+    return await axios.post(
+      "http://localhost:5000/api/dashboard/company-auth/login",
       body,
     );
   },

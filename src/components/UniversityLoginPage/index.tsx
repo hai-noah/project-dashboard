@@ -27,7 +27,7 @@ const UniversityLoginPage = () => {
   const submitData = async (data: any) => {
     try {
 
-      const response = await adminApi.universityAdminLogin(data);
+      const response = await adminApi.UniversityAdminLogin(data);
       if (response.data.success) {
         router.push("/university-admin/certificate");
         // window.localStorage.setItem("accessToken", response.data.accessToken);  //Storing access token to the local storage
