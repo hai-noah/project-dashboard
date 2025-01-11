@@ -106,9 +106,9 @@ const VerificationTable = ({ listOfVerification: listOfVerification }: Props) =>
               <table className="w-full ">
                 <thead>
                   <tr className="bg-[#F7F9FC] text-left dark:bg-dark-2">
-                    <th className="min-w-[150px] px-4 py-4 font-medium text-dark dark:text-white">
+                    {/* <th className="min-w-[150px] px-4 py-4 font-medium text-dark dark:text-white">
                       University Name
-                    </th>
+                    </th> */}
                     {/* <th className="min-w-[150px] px-4 py-4 font-medium text-dark dark:text-white">
                     Established Year
                     </th>

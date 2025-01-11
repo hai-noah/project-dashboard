@@ -2,7 +2,6 @@ import { axiosClient } from "./config/axiosConfig";
 
 export const universityApi = {
   createUniversity: async function (body: any) {
-    console.log(body)
     return await axiosClient.post(
       "universities/",
       body,

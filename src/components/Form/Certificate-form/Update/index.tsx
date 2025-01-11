@@ -39,10 +39,7 @@ const mySchema = z.object({
   courseDuration: z.string().trim().min(1, { message: "Course Duration is required." }), 
   affiliationNumber: z.string().trim().min(1, { message: "Affiliation Number is required." }),
   // universityLogo: z.any(),
-    universityLogo: z.any().refine((file) => file?.size <= MAX_FILE_SIZE, 'Max image size is 5MB.')
-      .refine(
-        (file) => ACCEPTED_IMAGE_TYPES.includes(file?.type),
-        "Only .jpg, .jpeg, .png and .webp formats are supported."),
+    universityLogo: z.any(),
   
   // establishedYear: z.string().trim().min(1, { message: "Year is required." }),
   // country: z.string().trim().min(1, { message: "Counrty is required." }),
@@ -72,8 +69,8 @@ const navigationData: PackageNavigation[] = [
   },
 ];
 
-const CertificateEditForm = ({data,id}:any) => {
-console.log(data)
+const CertificateEditForm = ({data,id}:{data:any,id:string}) => {
+console.log('data',data)
   const [internal, setInternal] = useState(false);
   const [success, setSuccess] = useState(false);
 
@@ -115,7 +112,6 @@ console.log(data)
 
      const submitData = async (data: any) => {
       try {
-        console.log('data::', data)
         // const formData = serialize(data)
        const response = await certificateApi.updateCertificate(id,data);
        

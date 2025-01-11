@@ -31,7 +31,6 @@ import { companyApi } from "@/api/companyApi";
 
 const mySchema = z.object({
   userName: z.string().trim().min(1, { message: "User Id is required." }),
-  password: z.string().trim().min(1, { message: "Password is required." }),
   companyName: z.string().trim().min(1, { message: "Company Name is required." }),
   address: z.string().trim().min(1, { message: "Address is required." }),
   email: z.string().trim().min(1, { message: "Email is required." }),
@@ -40,10 +39,7 @@ const mySchema = z.object({
   establishedYear: z.string().trim().min(1, { message: "Year is required." }),
   country: z.string().trim().min(1, { message: "Counrty is required." }),
   // companyLogo:z.any(),
-    companyLogo: z.any().refine((file) => file?.size <= MAX_FILE_SIZE, 'Max image size is 5MB.')
-      .refine(
-        (file) => ACCEPTED_IMAGE_TYPES.includes(file?.type),
-        "Only .jpg, .jpeg, .png and .webp formats are supported."),
+    companyLogo: z.any(),
 });
 const MAX_FILE_SIZE = 5000000;
 const ACCEPTED_IMAGE_TYPES = ["image/jpeg", "image/jpg", "image/png", "image/webp"];
@@ -91,7 +87,6 @@ console.log(data)
     } = useForm<TMySchema>({ resolver: zodResolver(mySchema),
       defaultValues:{
         userName:data?.userName,
-        password:data?.password,
         companyName:data?.companyName,
         address:data?.address,
         email:data?.email,
@@ -156,22 +151,7 @@ console.log(data)
                     </p>
                   )}
                 </div>
-                <div>
-                  <label className="mb-3 block text-body-sm font-medium text-dark dark:text-white">
-                    Password
-                  </label>
-                  <input
-                    {...register("password")}
-                    type="text"
-                    placeholder="Password"
-                    className="w-full rounded-[7px] border-[1.5px] border-stroke bg-transparent px-5.5 py-3 text-dark outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-gray-2 dark:border-dark-3 dark:bg-dark-2 dark:text-white dark:focus:border-primary"
-                  />
-                  {errors.password && (
-                    <p className="text-sm text-red-600">
-                      {errors.password.message}
-                    </p>
-                  )}
-                </div>
+                
               
 
                 <div>

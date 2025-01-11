@@ -31,15 +31,14 @@ try {
 }}
 
 
-const certificates = [{
-  name:'hello'
-}];
+// const certificates = [{
+//   name:'hello'
+// }];
 
 const TablesPage = async () => {
 
-  // const response = await getAllCertificate()
-  // const certificates = response?.data?.certificate
-
+  const response = await getAllCertificate()
+  const certificates = response.data.certificate
 
   
   return (

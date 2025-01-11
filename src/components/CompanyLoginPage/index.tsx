@@ -10,7 +10,7 @@ import toast from "react-hot-toast";
 import { z } from "zod";
 
 const mySchema = z.object({
-  email: z.string().min(1, { message: "Email is required." }),
+  userName: z.string().min(1, { message: "User Name is required." }),
   password: z.string().min(1, { message: "Password is required." }),
 });
 
@@ -29,7 +29,7 @@ const CompanyLoginPage = () => {
 
       const response = await adminApi.CompanyAdminLogin(data);
       if (response.data.success) {
-        router.push("/admin/universities");
+        router.push("/company-admin/verification");
         // window.localStorage.setItem("accessToken", response.data.accessToken);  //Storing access token to the local storage
         // Cookies.set("accessToken", response.data.accessToken);   //Storing access token to the browser cookies
 
@@ -38,7 +38,8 @@ const CompanyLoginPage = () => {
       }
      
     } catch (error: any) {
-      toast.error(error.message);
+      console.log('error',error)
+      toast.error(error.response.data.message)
     }
   };
 
@@ -87,14 +88,14 @@ const CompanyLoginPage = () => {
                       </svg>
                     </span>
                     <input
-                      {...register("email")}
+                      {...register("userName")}
                       className="w-full rounded-[7px] border-[1.5px] border-stroke bg-white py-2.5 pl-12.5 pr-4.5 text-dark focus:border-primary focus-visible:outline-none dark:border-dark-3 dark:bg-dark-2 dark:text-white dark:focus:border-primary"
-                      type="email"
-                      placeholder="email"
+                      type="userName"
+                      placeholder="User Name"
                     />
-                    {errors.email && (
+                    {errors.userName && (
                       <p className="text-sm text-red-600">
-                        {errors.email.message}
+                        {errors.userName.message}
                       </p>
                     )}
                   </div>

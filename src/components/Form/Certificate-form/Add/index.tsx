@@ -86,12 +86,9 @@ const CertificateAddForm = () => {
     control,
     formState: { errors, isSubmitting },
   } = useForm<TMySchema>({ resolver: zodResolver(mySchema) });
-  console.log(errors)
 
   const submitData = async (data: any) => {
-    console.log('errors::', errors)
     try {
-      console.log('data::', data)
       // const formData = serialize(data)
       const response = await certificateApi.createCertificate(data);
 

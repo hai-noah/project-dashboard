@@ -13,6 +13,7 @@ type Props = {
 const CertificateTable = ({ listOfCertificate: listOfCertificate }: Props) => {
   const [searchTerm, setSearchTerm] = useState("");
   let [itemId, setItemId] = useState('');
+  console.log('id:::::',itemId)
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 5;
 
@@ -35,17 +36,19 @@ const CertificateTable = ({ listOfCertificate: listOfCertificate }: Props) => {
   const router = useRouter();
   // router.refresh();
 
-async function deleteCertificate(id: any) {
+async function deleteCert(id: any) {
+  console.log('id11111',id)
     try {
       const responseDelete = await certificateApi.deleteCertificate(id);
-      console.log("first", responseDelete.data.response);
+      console.log("first");
 
       if (responseDelete.data.success == true) {
         toast.success(responseDelete.data.message);
         router.refresh();
       }
     } catch (error: any) {
-      toast.error(error.response.data.message);
+console.log('error:::',error)
+
     }
   }
   return (
@@ -132,7 +135,7 @@ async function deleteCertificate(id: any) {
                         className={`border-[#eee] px-4 py-4 dark:border-dark-3 xl:pl-7.5 ${index === packageItem.length - 1 ? "border-b-0" : "border-b"}`}
                       >
                         <h6 className="text-dark dark:text-white">
-                          {packageItem.certificateName}
+                          {packageItem.certificateNumber}
                         </h6>
                         {/* <p className="mt-[3px] text-body-sm font-medium">
                     ${packageItem.price}
@@ -191,7 +194,7 @@ async function deleteCertificate(id: any) {
                           >
                             {itemId === packageItem._id && (
                               <Delete
-                                deleteId={deleteCertificate}
+                                deleteId={deleteCert}
                                 id={packageItem._id}
                                 isOpen={itemId === packageItem._id}
                                 setIsOpen={setItemId}

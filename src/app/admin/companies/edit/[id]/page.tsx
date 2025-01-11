@@ -12,7 +12,6 @@ export const metadata: Metadata = {
 async function viewCompany(id:string) {
   try {
     const response = await companyApi.viewCompany(id);
-    console.log('heyyy edit',response.data)
 
     // const Products = await response.json();
     return response.data;

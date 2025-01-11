@@ -31,7 +31,6 @@ import { universityApi } from "@/api/universityApi";
 
 const mySchema = z.object({
   userName: z.string().trim().min(1, { message: "User Name is required." }),
-  password: z.string().trim().min(1, { message: "Password is required." }),
   universityName: z.string().trim().min(1, { message: "University Name is required." }),
   address: z.string().trim().min(1, { message: "Address is required." }),
   email: z.string().trim().min(1, { message: "Email is required." }),
@@ -42,10 +41,7 @@ const mySchema = z.object({
   country: z.string().trim().min(1, { message: "Counrty is required." }),
   deanDirectorName: z.string().trim().min(1, { message: "Name is required." }),
  // universityLogo: z.any(),
-  universityLogo: z.any().refine((file) => file?.size <= MAX_FILE_SIZE, 'Max image size is 5MB.')
-    .refine(
-      (file) => ACCEPTED_IMAGE_TYPES.includes(file?.type),
-      "Only .jpg, .jpeg, .png and .webp formats are supported."),
+  universityLogo: z.any(),
 });
 const MAX_FILE_SIZE = 5000000;
 const ACCEPTED_IMAGE_TYPES = ["image/jpeg", "image/jpg", "image/png", "image/webp"];
@@ -93,7 +89,6 @@ const UniversityEditForm = ({data,id}:any) => {
   } = useForm<TMySchema>({ resolver: zodResolver(mySchema),
     defaultValues:{
       userName:data.userName,
-      password:data.password,
       universityName:data.universityName,
       address:data.address,
       email:data.email,
@@ -160,22 +155,7 @@ const UniversityEditForm = ({data,id}:any) => {
                     </p>
                   )}
                 </div>
-                <div>
-                  <label className="mb-3 block text-body-sm font-medium text-dark dark:text-white">
-                  Password
-                  </label>
-                  <input
-                    {...register("password")}
-                    type="text"
-                    placeholder="Password"
-                    className="w-full rounded-[7px] border-[1.5px] border-stroke bg-transparent px-5.5 py-3 text-dark outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-gray-2 dark:border-dark-3 dark:bg-dark-2 dark:text-white dark:focus:border-primary"
-                  />
-                  {errors.password && (
-                    <p className="text-sm text-red-600">
-                      {errors.password.message}
-                    </p>
-                  )}
-                </div>
+               
                
 
                 <div>

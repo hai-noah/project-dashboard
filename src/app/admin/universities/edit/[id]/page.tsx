@@ -14,7 +14,6 @@ export const metadata: Metadata = {
 async function viewUniversity(id:string) {
   try {
     const response = await universityApi.viewUniversity(id);
-    console.log('heyyy edit',response.data)
 
     // const Products = await response.json();
     return response.data;

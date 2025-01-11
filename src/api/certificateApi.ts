@@ -2,15 +2,14 @@ import { axiosClient } from "./config/axiosConfig";
 
 export const certificateApi = {
   createCertificate: async function (body: any) {
-    console.log(body)
     return await axiosClient.post(
       "certificates/",
-      body
-    //   {
-    //     headers: {
-    //       "Content-Type": "multipart/form-data",
-    //     },
-    //   },
+      body,
+      {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      },
     );
   },
   updateCertificate: async function (certificateId: any, body: any) {
@@ -32,21 +31,15 @@ export const certificateApi = {
       
     );
   },
-  viewCertificate: async function (certificateId: any, body: any) {
-    return await axiosClient.put(
+  viewCertificate: async function (certificateId: string) {
+    return await axiosClient.get(
       `certificates/view/${certificateId}`,
-      body,
-      {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-      },
     );
   },
   getAllCertificate: async function () {
     
     return await axiosClient.get(
-      "certificates/getAll/",
+      "certificates/all/",
     );
   },
 };

@@ -25,7 +25,6 @@ const packageData: PackageNavigation[] = [
 async function getAllUniversity() {
 try {
   const response = await universityApi.getAllUniversity();
-  console.log('heyyy',response.data)
   return response.data;
 } catch (error:any) {
   console.log(error)

@@ -37,7 +37,8 @@ const LoginPage = () => {
         router.push("/admin/companies");
       }
     } catch (error: any) {
-      toast.error(error.message);
+      console.log('error',error)
+      toast.error(error.response.data.message)
     }
   };
 

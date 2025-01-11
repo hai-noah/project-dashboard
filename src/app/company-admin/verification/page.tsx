@@ -43,7 +43,7 @@ const TablesPage = async () => {
    
   return (
     <DefaultLayout>
-      <Breadcrumb pageName="univ" navigation={packageData}/>
+      <Breadcrumb pageName="" navigation={packageData}/>
       <div className="flex flex-col gap-10">
         <VerificationTable listOfVerification={verification}/>
       </div>
