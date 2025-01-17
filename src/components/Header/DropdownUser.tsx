@@ -2,10 +2,20 @@ import { useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import ClickOutside from "@/components/ClickOutside";
+import { usePathname, useRouter } from "next/navigation";
 
 const DropdownUser = () => {
   const [dropdownOpen, setDropdownOpen] = useState(false);
+  const router = useRouter();
 
+  const pathname = usePathname();
+  
+  function Logout() {
+    pathname.startsWith('/admin') ? router.push('/auth/sigin')
+      : pathname.startsWith('/company-admin') ? router.push('/company-login')
+        : pathname.startsWith('/university-admin') ? router.push('/university-login') : router.push('/')
+
+  }
   return (
     <ClickOutside onClick={() => setDropdownOpen(false)} className="relative">
       <Link
@@ -141,8 +151,7 @@ const DropdownUser = () => {
             </li>
           </ul>
           <div className="p-2.5">
-            <Link href={''}></Link>
-            <button className="flex w-full items-center gap-2.5 rounded-[7px] p-2.5 text-sm font-medium text-dark-4 duration-300 ease-in-out hover:bg-gray-2 hover:text-dark dark:text-dark-6 dark:hover:bg-dark-3 dark:hover:text-white lg:text-base">
+            <button className="flex w-full items-center gap-2.5 rounded-[7px] p-2.5 text-sm font-medium text-dark-4 duration-300 ease-in-out hover:bg-gray-2 hover:text-dark dark:text-dark-6 dark:hover:bg-dark-3 dark:hover:text-white lg:text-base" onClick={Logout}>
               <svg
                 className="fill-current"
                 width="18"
