@@ -30,8 +30,8 @@ const UniversityLoginPage = () => {
       const response = await adminApi.UniversityAdminLogin(data);
       if (response.data.success) {
         router.push("/university-admin/certificate");
-        // window.localStorage.setItem("accessToken", response.data.accessToken);  //Storing access token to the local storage
-        // Cookies.set("accessToken", response.data.accessToken);   //Storing access token to the browser cookies
+        window.localStorage.setItem("accessToken", response.data.accessToken);  //Storing access token to the local storage
+        Cookies.set("accessToken", response.data.accessToken);   //Storing access token to the browser cookies
 
         router.refresh();
         toast.success(response.data.message);

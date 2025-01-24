@@ -5,10 +5,6 @@ import { PackageNavigation } from "@/types/packageNavigation";
 import CertificateTable from "@/components/Tables/Certificate";
 import { certificateApi } from "@/api/certificateApi";
 
-export const metadata: Metadata = {
-  title: "Next.js Tables Page | NextAdmin - Next.js Dashboard Kit",
-  description: "This is Next.js Tables page for NextAdmin Dashboard Kit",
-};
 
 const packageData: PackageNavigation[] = [
   {
@@ -38,7 +34,7 @@ try {
 const TablesPage = async () => {
 
   const response = await getAllCertificate()
-  const certificates = response.data.certificate
+  const certificates = response?.data?.certificate
 
   
   return (

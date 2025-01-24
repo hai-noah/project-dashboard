@@ -1,12 +1,14 @@
 import { axiosClient } from "./config/axiosConfig";
 
 export const certificateApi = {
+  
   createCertificate: async function (body: any) {
     return await axiosClient.post(
       "certificates/",
       body,
       {
         headers: {
+          "Authorization": "bearer " + window.localStorage.accessToken,
           "Content-Type": "multipart/form-data",
         },
       },
@@ -18,6 +20,8 @@ export const certificateApi = {
       body,
       {
         headers: {
+          "Authorization": "bearer" + window.localStorage.accessToken,
+
           "Content-Type": "multipart/form-data",
         },
       },
