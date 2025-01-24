@@ -38,7 +38,7 @@ const mySchema = z.object({
   contactNumber: z.string().trim().min(1, { message: "contact Number is required." }),
   websiteURL: z.string().trim().min(1, { message: "Website URL is required." }),
   establishedYear: z.string().optional(),
-  accreditationStatus: z.string().trim().min(1, { message: "Status is required." }),
+  // accreditationStatus: z.string().trim().min(1, { message: "Status is required." }),
   country: z.string().trim().min(1, { message: "Counrty is required." }),
   deanDirectorName: z.string().trim().min(1, { message: "Name is required." }),
   // universityLogo: z.any(),
@@ -267,7 +267,7 @@ const UniversityAddForm = () => {
                   )}
                 </div>
 
-                <div>
+                {/* <div>
                   <SelectDropdown
                     data={[{ _id: 1, name: 'pending' }]}
                     name={" Accreditation Status"}
@@ -278,7 +278,7 @@ const UniversityAddForm = () => {
                       {errors.accreditationStatus.message}
                     </p>
                   )}
-                </div>
+                </div> */}
                 <div>
                   <DropzoneWrapper>
                     <Typography fontWeight={500} color="textPrimary" sx={{ mb: 2.5 }}>

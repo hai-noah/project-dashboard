@@ -38,7 +38,7 @@ const DropdownNotification = () => {
   return (
     <ClickOutside onClick={() => setDropdownOpen(false)} className="relative hidden sm:block">
       <li>
-        <Link
+        {/* <Link
           onClick={() => {
             setNotifying(false);
             setDropdownOpen(!dropdownOpen);
@@ -71,7 +71,7 @@ const DropdownNotification = () => {
               <span className="absolute -z-1 inline-flex h-full w-full animate-ping rounded-full bg-red-light opacity-75"></span>
             </span>
           </span>
-        </Link>
+        </Link> */}
 
         {dropdownOpen && (
           <div

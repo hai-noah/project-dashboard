@@ -97,7 +97,7 @@ const UniversityTable = ({ listOfUniversity: listOfUniversity }: Props) => {
                 href={"/admin/universities/add"}
                 className="mb-3 mr-7 rounded-md bg-black px-4 py-2 text-white dark:bg-white dark:text-black"
               >
-                View Request
+                Add University
               </Link>
             </div>
             <div className="max-w-full overflow-x-auto">

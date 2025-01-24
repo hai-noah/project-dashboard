@@ -11,7 +11,7 @@ const DropdownUser = () => {
   const pathname = usePathname();
   
   function Logout() {
-    pathname.startsWith('/admin') ? router.push('/auth/sigin')
+    pathname.startsWith('/admin') ? router.push('/login')
       : pathname.startsWith('/company-admin') ? router.push('/company-login')
         : pathname.startsWith('/university-admin') ? router.push('/university-login') : router.push('/')
 
