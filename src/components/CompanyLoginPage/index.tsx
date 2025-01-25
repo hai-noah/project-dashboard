@@ -135,6 +135,7 @@ const CompanyLoginPage = () => {
                     )}
                   </div>
                 </div>
+                <div className="flex justify-center gap-2">
 
                 <div className="flex justify-center gap-3">
                   <button
@@ -144,6 +145,16 @@ const CompanyLoginPage = () => {
                   >
                     Login
                   </button>
+                </div>
+                <div className="flex justify-center gap-3">
+                  <button
+                    className="flex items-center justify-center rounded-[7px] bg-primary px-10 py-[7px] font-medium text-gray-2 hover:bg-opacity-90"
+                    type="submit"
+                    disabled={isSubmitting}
+                  >
+                    Register
+                  </button>
+                </div>
                 </div>
               </form>
             </div>

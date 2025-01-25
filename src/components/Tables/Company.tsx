@@ -98,6 +98,7 @@ const CompanyTable = ({ listOfCompany: listOfCompany }: Props) => {
               >
                   Add Company
               </Link>
+           
             </div>
             <div className="max-w-full overflow-x-auto">
               <table className="w-full ">

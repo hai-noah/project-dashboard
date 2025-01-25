@@ -28,17 +28,20 @@ const UniversityLoginPage = () => {
     try {
 
       const response = await adminApi.UniversityAdminLogin(data);
-      if (response.data.success) {
+      if (response.data.success == true) {
         router.push("/university-admin/certificate");
         window.localStorage.setItem("accessToken", response.data.accessToken);  //Storing access token to the local storage
         Cookies.set("accessToken", response.data.accessToken);   //Storing access token to the browser cookies
 
         router.refresh();
         toast.success(response.data.message);
+      } else if (response.data.success==false){
+        toast.error(response.data.message);
+
       }
-     
+
     } catch (error: any) {
-      console.log('error',error)
+      console.log('error', error)
       // toast.error(error.response.data.message)
     }
   };
@@ -61,7 +64,7 @@ const UniversityLoginPage = () => {
 
                 <div className="mb-5.5">
                   <label className="mb-3 block text-body-sm font-medium text-dark dark:text-white">
-                  User Name
+                    User Name
                   </label>
                   <div className="relative">
                     <span className="absolute left-4.5 top-1/2 -translate-y-1/2">
@@ -136,14 +139,27 @@ const UniversityLoginPage = () => {
                   </div>
                 </div>
 
-                <div className="flex justify-center gap-3">
-                  <button
-                    className="flex items-center justify-center rounded-[7px] bg-primary px-10 py-[7px] font-medium text-gray-2 hover:bg-opacity-90"
-                    type="submit"
-                    disabled={isSubmitting}
-                  >
-                    Login
-                  </button>
+                <div className="flex justify-center gap-2">
+
+                  <div className="flex justify-center gap-3">
+                    <button
+                      className="flex items-center justify-center rounded-[7px] bg-primary px-10 py-[7px] font-medium text-gray-2 hover:bg-opacity-90"
+                      type="submit"
+                      disabled={isSubmitting}
+                    >
+                      Login
+                    </button>
+                  </div>
+                  <div className="flex justify-center gap-3">
+                    <button
+                      className="flex items-center justify-center rounded-[7px] bg-primary px-10 py-[7px] font-medium text-gray-2 hover:bg-opacity-90"
+                      type="button"
+                      disabled={isSubmitting}
+                      onClick={() => (router.push('/university-register'))}
+                    >
+                      Register
+                    </button>
+                  </div>
                 </div>
               </form>
             </div>
