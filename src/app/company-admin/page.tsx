@@ -1,7 +1,7 @@
 import { Metadata } from "next";
 import DefaultLayout from "@/components/Layouts/DefaultLaout";
 import React from "react";
-import Form from "./_components/VerificationForm";
+import Form from "../_components/VerificationForm";
 
 // export const metadata: Metadata = {
 //   title:

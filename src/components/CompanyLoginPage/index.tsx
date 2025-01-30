@@ -29,7 +29,7 @@ const CompanyLoginPage = () => {
 
       const response = await adminApi.CompanyAdminLogin(data);
       if (response.data.success) {
-        router.push("/company-admin/verification");
+        router.push("/company-admin");
         // window.localStorage.setItem("accessToken", response.data.accessToken);  //Storing access token to the local storage
         // Cookies.set("accessToken", response.data.accessToken);   //Storing access token to the browser cookies
 
@@ -147,14 +147,15 @@ const CompanyLoginPage = () => {
                   </button>
                 </div>
                 <div className="flex justify-center gap-3">
-                  <button
-                    className="flex items-center justify-center rounded-[7px] bg-primary px-10 py-[7px] font-medium text-gray-2 hover:bg-opacity-90"
-                    type="submit"
-                    disabled={isSubmitting}
-                  >
-                    Register
-                  </button>
-                </div>
+                    <button
+                      className="flex items-center justify-center rounded-[7px] bg-primary px-10 py-[7px] font-medium text-gray-2 hover:bg-opacity-90"
+                      type="button"
+                      disabled={isSubmitting}
+                      onClick={() => (router.push('/company-register'))}
+                    >
+                      Register
+                    </button>
+                  </div>
                 </div>
               </form>
             </div>
