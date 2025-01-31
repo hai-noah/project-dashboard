@@ -33,17 +33,17 @@ const mySchema = z.object({
   userName: z.string().trim().min(1, { message: "User Id is required." }),
   password: z.string().trim().min(1, { message: "Password is required." }),
   companyName: z.string().trim().min(1, { message: "Company Name is required." }),
-  address: z.string().trim().min(1, { message: "Address is required." }),
+  // address: z.string().trim().min(1, { message: "Address is required." }),
   email: z.string().trim().min(1, { message: "Email is required." }),
   contactNumber: z.string().trim().min(1, { message: "Contact Number is required." }),
-  websiteURL: z.string().trim().min(1, { message: "Website URL is required." }),
-  establishedYear: z.string().optional(),
+  // websiteURL: z.string().trim().min(1, { message: "Website URL is required." }),
+  // establishedYear: z.string().optional(),
   country: z.string().trim().min(1, { message: "Counrty is required." }),
   // companyLogo:z.any(),
-  companyLogo: z.any().refine((file) => file?.size <= MAX_FILE_SIZE, 'Max image size is 5MB.')
-    .refine(
-      (file) => ACCEPTED_IMAGE_TYPES.includes(file?.type),
-      "Only .jpg, .jpeg, .png and .webp formats are supported."),
+  // companyLogo: z.any().refine((file) => file?.size <= MAX_FILE_SIZE, 'Max image size is 5MB.')
+  //   .refine(
+  //     (file) => ACCEPTED_IMAGE_TYPES.includes(file?.type),
+  //     "Only .jpg, .jpeg, .png and .webp formats are supported."),
 });
 const MAX_FILE_SIZE = 5000000;
 const ACCEPTED_IMAGE_TYPES = ["image/jpeg", "image/jpg", "image/png", "image/webp"];
@@ -104,8 +104,9 @@ const CompanyAddForm = () => {
   return (
     <>
 
-      <Breadcrumb pageName="REGISTER COMPANY" navigation={navigationData} />
-      <div className="gap-9 sm:grid-cols-2">
+      {/* <Breadcrumb pageName="REGISTER COMPANY" navigation={navigationData} /> */}
+      <div className="w-full flex justify-center">
+      <div className="gap-9 sm:grid-cols-2 w-[60%]">
 
         <form onSubmit={handleSubmit(submitData)}>
           <div className="flex flex-col gap-9">
@@ -169,7 +170,7 @@ const CompanyAddForm = () => {
                   )}
                 </div>
 
-                <div>
+                {/* <div>
                   <label className="mb-3 block text-body-sm font-medium text-dark dark:text-white">
                     Address
                   </label>
@@ -184,7 +185,7 @@ const CompanyAddForm = () => {
                       {errors.address.message}
                     </p>
                   )}
-                </div>
+                </div> */}
 
 
                 <div>
@@ -221,7 +222,7 @@ const CompanyAddForm = () => {
                   )}
                 </div>
 
-                <div>
+                {/* <div>
                   <label className="mb-3 block text-body-sm font-medium text-dark dark:text-white">
                     Website URL
                   </label>
@@ -249,12 +250,12 @@ const CompanyAddForm = () => {
                     placeholder="Established Year"
                     className="w-full rounded-[7px] border-[1.5px] border-stroke bg-transparent px-5.5 py-3 text-dark outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-gray-2 dark:border-dark-3 dark:bg-dark-2 dark:text-white dark:focus:border-primary"
                   />
-                  {/* <input
+                 <input
                     {...register("establishedYear")}
                     type="calendar"
                     placeholder="Issue Date"
                     className="w-full rounded-[7px] border-[1.5px] border-stroke bg-transparent px-5.5 py-3 text-dark outline-none transition focus:border-primary active:border-primary disabled:cursor-default disabled:bg-gray-2 dark:border-dark-3 dark:bg-dark-2 dark:text-white dark:focus:border-primary"
-                  /> */}
+                  /> 
                   {errors.establishedYear && (
                     <p className="text-sm text-red-600">
                       {errors.establishedYear.message}
@@ -279,7 +280,7 @@ const CompanyAddForm = () => {
                           <FileUploaderSingle file={field.value} setFile={field.onChange} error={errors.companyLogo} />
                         </div>
                       )}
-                    />
+                    /> */}
 
                     <div>
                       <SelectDropdown
@@ -298,7 +299,7 @@ const CompanyAddForm = () => {
 
 
 
-                  </DropzoneWrapper>
+                  {/* </DropzoneWrapper> */}
                   {/* <label className="mb-3 block text-body-sm font-medium text-dark dark:text-white">
                     Brand Logo
                   </label>
@@ -307,7 +308,7 @@ const CompanyAddForm = () => {
                     type="file"
                     className="w-full cursor-pointer rounded-[7px] border-[1.5px] border-stroke bg-transparent outline-none transition file:mr-5 file:border-collapse file:cursor-pointer file:border-0 file:border-r file:border-solid file:border-stroke file:bg-[#E2E8F0] file:px-6.5 file:py-[13px] file:text-body-sm file:font-medium file:text-dark-5 file:hover:bg-primary file:hover:bg-opacity-10 focus:border-primary active:border-primary disabled:cursor-default disabled:bg-dark dark:border-dark-3 dark:bg-dark-2 dark:file:border-dark-3 dark:file:bg-white/30 dark:file:text-white dark:focus:border-primary"
                   /> */}
-                </div>
+                {/* </div> */}
                 {/* <Link href={"/"}> */}
                 <button
                   className="h-10 w-[10%] items-start rounded-lg bg-black text-white dark:bg-white dark:text-black"
@@ -321,7 +322,7 @@ const CompanyAddForm = () => {
             </div>
           </div>
         </form>
-      </div>
+      </div></div>
     </>
   );
 };

@@ -28,13 +28,16 @@ const CompanyLoginPage = () => {
     try {
 
       const response = await adminApi.CompanyAdminLogin(data);
-      if (response.data.success) {
+      if (response.data.success==true) {
         router.push("/company-admin");
         // window.localStorage.setItem("accessToken", response.data.accessToken);  //Storing access token to the local storage
         // Cookies.set("accessToken", response.data.accessToken);   //Storing access token to the browser cookies
 
         router.refresh();
         toast.success(response.data.message);
+      }else if(response.data.success==false){
+        toast.error(response.data.message);
+
       }
      
     } catch (error: any) {

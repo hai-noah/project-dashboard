@@ -12,6 +12,12 @@ export const companyApi = {
       },
     );
   },
+  certificateVerify: async function (body: any) {
+    return await axiosClient.post(
+      "companies/certificate-validating",
+      body
+    );
+  },
   updateCompany: async function (companyId: any, body: any) {
     return await axiosClient.put(
       `companies/update/${companyId}`,
@@ -21,6 +27,18 @@ export const companyApi = {
           "Content-Type": "multipart/form-data",
         },
       },
+    );
+  },
+  Approve: async function (companyId: any) {
+    return await axiosClient.post(
+      `companies/approve/${companyId}`
+
+    );
+  },
+  Reject: async function (companyId: any) {
+    return await axiosClient.post(
+      `companies/reject/${companyId}`
+
     );
   },
   deleteCompany: async function (companyId: any) {
@@ -40,6 +58,12 @@ export const companyApi = {
     
     return await axiosClient.get(
       "companies/all/",
+    );
+  },
+  getAllRequest: async function () {
+
+    return await axiosClient.get(
+      "companies/requests/",
     );
   },
 };

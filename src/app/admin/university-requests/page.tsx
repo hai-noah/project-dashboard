@@ -3,7 +3,7 @@ import { Metadata } from "next";
 import DefaultLayout from "@/components/Layouts/DefaultLaout";
 import toast from "react-hot-toast";
 import { PackageNavigation } from "@/types/packageNavigation";
-import UniversityTable from "@/components/Tables/requests";
+import UniversityTable from "@/components/Tables/university-requests";
 import { universityApi } from "@/api/universityApi";
 
 export const metadata: Metadata = {

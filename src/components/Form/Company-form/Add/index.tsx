@@ -86,7 +86,9 @@ const CompanyAddForm = () => {
     try {
       console.log('data::', data)
       // const formData = serialize(data)
-      const response = await companyApi.createCompany(data);
+      const datas = {...data,isApproved:'Approve'}
+
+      const response = await companyApi.createCompany(datas);
 
       if (response.data.success == true) {
 
