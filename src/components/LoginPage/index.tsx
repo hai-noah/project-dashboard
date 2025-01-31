@@ -49,7 +49,7 @@ const LoginPage = () => {
   };
 
   return (
-    <>
+    <>  
       <div className="flex h-[100vh] w-full items-center justify-center">
         <div className="h-[50%] w-[30%]">
           <div className="rounded-[10px] border border-stroke bg-white shadow-1 dark:border-dark-3 dark:bg-gray-dark dark:shadow-card">
@@ -155,6 +155,7 @@ const LoginPage = () => {
           </div>
         </div>
       </div>
+     
     </>
   );
 };
