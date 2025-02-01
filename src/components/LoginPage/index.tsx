@@ -7,6 +7,7 @@ import { serialize } from "object-to-formdata";
 import React from "react";
 import { useForm } from "react-hook-form";
 import toast from "react-hot-toast";
+import Image from "next/image";
 import { z } from "zod";
 
 const mySchema = z.object({
@@ -49,7 +50,22 @@ const LoginPage = () => {
   };
 
   return (
-    <>  
+    <>     <div className="relative">
+                              <span className="h-12 w-[100%]  relative rounded-full">
+                                 <div className="relative w-full h-[40rem]"> <Image
+                                   fill
+                                   src="/images/login/User-01.png"
+                                    // style={{
+                                    //   width: "auto",
+                                    //   height: "auto",
+                                    // }}
+                                    alt="User"
+                                    className="object-fill"
+                                  /></div>
+                                </span>
+               
+
+         `<div className="absolute w-full top-0 right-[-20rem]">
       <div className="flex h-[100vh] w-full items-center justify-center">
         <div className="h-[50%] w-[30%]">
           <div className="rounded-[10px] border border-stroke bg-white shadow-1 dark:border-dark-3 dark:bg-gray-dark dark:shadow-card">
@@ -155,7 +171,8 @@ const LoginPage = () => {
           </div>
         </div>
       </div>
-     
+      `</div>`
+     </div>
     </>
   );
 };

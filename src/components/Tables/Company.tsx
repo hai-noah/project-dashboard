@@ -114,9 +114,9 @@ const CompanyTable = ({ listOfCompany: listOfCompany }: Props) => {
                     <th className="min-w-[150px] px-4 py-4 font-medium text-dark dark:text-white">
                       Country
                     </th>
-                    <th className="min-w-[150px] px-4 py-4 font-medium text-dark dark:text-white">
+                    {/* <th className="min-w-[150px] px-4 py-4 font-medium text-dark dark:text-white">
                       Status
-                    </th>
+                    </th> */}
                     <th className="min-w-[120px] px-4 py-4 font-medium text-dark dark:text-white"></th>
                     <th className="px-4 py-4 text-right font-medium text-dark dark:text-white xl:pr-7.5">
                       Actions
@@ -148,13 +148,13 @@ const CompanyTable = ({ listOfCompany: listOfCompany }: Props) => {
                           {packageItem.country}
                         </p>
                       </td>
-                      <td
+                      {/* <td
                         className={`border-[#eee] px-4 py-4 dark:border-dark-3 ${index === packageItem.length - 1 ? "border-b-0" : "border-b"}`}
                       >
                         <p className="text-dark dark:text-white">
                           {packageItem.status}
                         </p>
-                      </td>
+                      </td> */}
                   
                       <td
                         className={`border-[#eee] px-4 py-4 dark:border-dark-3 ${index === packageItem.length - 1 ? "border-b-0" : "border-b"}`}

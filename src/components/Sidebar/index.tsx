@@ -247,7 +247,7 @@ const groupsToShow = pathname.startsWith('/admin')?menuGroups : pathname.startsW
             <Image
               width={176}
               height={32}
-              src={"/images/logo/logo-dark.svg"}
+              src={"/images/logo/logo-icon-2.svg"}
               alt="Logo"
               priority
               className="dark:hidden"

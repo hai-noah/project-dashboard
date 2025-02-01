@@ -127,6 +127,10 @@ const UniversityTable = ({ listOfUniversity: listOfUniversity }: Props) => {
                     {/* <th className="min-w-[150px] px-4 py-4 font-medium text-dark dark:text-white">
                       Status
                     </th> */}
+                    <th className="min-w-[120px] px-4 py-4 font-medium text-dark dark:text-white"></th>
+                    <th className="px-4 py-4 text-right font-medium text-dark dark:text-white xl:pr-7.5">
+                      Actions
+                    </th>
                     
                   </tr>
                 </thead>

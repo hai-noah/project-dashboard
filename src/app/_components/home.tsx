@@ -1,6 +1,7 @@
 'use client'
 import React from 'react'
 import Image from "next/image";
+import Link from 'next/link';
 
 const HomePage = () => {
  
@@ -8,46 +9,57 @@ const HomePage = () => {
         <>
         
             <div>
-               <span className="h-12 w-[100%] rounded-full">
-                        <Image
-                          width={1500}
-                          height={500}
-                          src="/images/home/User-01.png"
-                          // style={{
-                          //   width: "auto",
-                          //   height: "auto",
-                          // }}
-                          alt="User"
-                          className="full"
-                        />
-                      </span>
-                           
+
+             <div className='relative'>
+             <Link href={"/login"}>
+                <button
+                      className="absolute top-[23rem] right-[26rem] bg-white text-black  z-50 h-10 w-[17%] items-start rounded-full dark:bg-white dark:text-black"
+                      type="submit"             >
+                    Login
+                    </button>
+             </Link>
+              
+                 <span className="h-12 w-[100%] rounded-full">
+                 <div className="relative w-full h-[40rem]"><Image
+                           fill
+                            src="/images/home/User-01.png"
+                            // style={{
+                            //   width: "auto",
+                            //   height: "auto",
+                            // }}
+                            alt="User"
+                            className="object-fill"
+                            /></div>
+                            </span>
+             </div>
+
+                           <br></br>
+
                <span className="h-12 w-[100%]  rounded-full">
-                        <Image
-                          width={1500}
-                          height={500}
+                         <div className="relative w-full h-[40rem]"><Image
+                         fill
                           src="/images/home/User-02.png"
                           // style={{
                           //   width: "auto",
                           //   height: "auto",
                           // }}
                           alt="User"
-                          className="full"
-                        />
+                           className="object-fill"
+                           /></div>
                       </span>
+                      <br></br>
 
                <span className="h-12 w-[100%]  rounded-full">
-                        <Image
-                          width={1500}
-                          height={500}
+               <div className="relative w-full h-[40rem]"> <Image
+                          fill
                           src="/images/home/User-03.png"
                           // style={{
                           //   width: "auto",
                           //   height: "auto",
                           // }}
                           alt="User"
-                          className="full"
-                        />
+                          className="object-fill"
+                          /></div>
                       </span>
                  </div>
           
