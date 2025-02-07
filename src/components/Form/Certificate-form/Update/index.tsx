@@ -39,7 +39,7 @@ const mySchema = z.object({
   courseDuration: z.string().trim().min(1, { message: "Course Duration is required." }), 
   affiliationNumber: z.string().trim().min(1, { message: "Affiliation Number is required." }),
   // universityLogo: z.any(),
-    universityLogo: z.any(),
+    certificatePhoto: z.any(),
   
   // establishedYear: z.string().trim().min(1, { message: "Year is required." }),
   // country: z.string().trim().min(1, { message: "Counrty is required." }),
@@ -103,7 +103,7 @@ console.log('data',data)
         universityName:data?.universityName,
         courseDuration:data?.courseDuration,
         affiliationNumber : data?.affiliationNumber,
-        universityLogo:data?.universityLogo,
+        certificatePhoto:data?.certificatePhoto,
         
       }
      });
@@ -112,6 +112,7 @@ console.log('data',data)
 
      const submitData = async (data: any) => {
       try {
+        console.log("submitttttt")
         // const formData = serialize(data)
        const response = await certificateApi.updateCertificate(id,data);
        
@@ -318,18 +319,18 @@ console.log('data',data)
                 <div>
                   <DropzoneWrapper>
                     <Typography fontWeight={500} color="textPrimary" sx={{ mb: 2.5 }}>
-                      University Logo
-                      {!!errors.universityLogo && (
-                        <span style={{ color: 'red', fontSize: '14px', position: 'absolute', right: '65px' }}>Invalid Image format {!!errors.universityLogo}</span>
+                    Certificate Photo
+                      {!!errors.certificatePhoto && (
+                        <span style={{ color: 'red', fontSize: '14px', position: 'absolute', right: '65px' }}>Invalid Image format {!!errors.certificatePhoto}</span>
                       )}
                     </Typography>
                     <Controller
-                      name='universityLogo'
+                      name='certificatePhoto'
                       control={control}
                       defaultValue=''
                       render={({ field }) => (
                         <div>
-                          <FileUploaderSingle file={field.value} setFile={field.onChange} error={errors.universityLogo} />
+                          <FileUploaderSingle file={field.value} setFile={field.onChange} error={errors.certificatePhoto} />
                         </div>
                       )}
                     />

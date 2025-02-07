@@ -23,7 +23,6 @@ axiosClient.interceptors.request.use(
   (config) => {
     let token;
 
-console.log('haiiiiiiiiiiii')
     if (typeof window !== 'undefined') {
       token = window.localStorage.getItem('accessToken');
     }
@@ -31,7 +30,7 @@ console.log('haiiiiiiiiiiii')
     if (!token) {
       token = Cookies.get('accessToken');
     }
-    console.log(token)
+    
     if (token) {
       config.headers['Authorization'] = `bearer ${token}`;
     }

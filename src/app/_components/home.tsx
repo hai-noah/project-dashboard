@@ -13,7 +13,7 @@ const HomePage = () => {
              <div className='relative'>
              <Link href={"/login"}>
                 <button
-                      className="absolute top-[23rem] right-[26rem] bg-white text-black  z-50 h-10 w-[17%] items-start rounded-full dark:bg-white dark:text-black"
+                      className="absolute top-[26rem] left-[14.5rem] bg-white text-black  z-50 h-10 w-[10%] items-start rounded-full dark:bg-white dark:text-black"
                       type="submit"             >
                     Login
                     </button>

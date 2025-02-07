@@ -8,7 +8,7 @@ export const certificateApi = {
       body,
       {
         headers: {
-          "Authorization": "bearer " + window.localStorage.accessToken,
+          // "Authorization": "bearer " + window.localStorage.accessToken,
           "Content-Type": "multipart/form-data",
         },
       },
@@ -20,7 +20,7 @@ export const certificateApi = {
       body,
       {
         headers: {
-          "Authorization": "bearer" + window.localStorage.accessToken,
+          // "Authorization": "bearer" + window.localStorage.accessToken,
 
           "Content-Type": "multipart/form-data",
         },
@@ -38,6 +38,11 @@ export const certificateApi = {
   viewCertificate: async function (certificateId: string) {
     return await axiosClient.get(
       `certificates/view/${certificateId}`,
+      // {
+      //   headers: {
+      //     "Authorization": "bearer" + window.localStorage.accessToken,
+      //   },
+      // },
     );
   },
   getAllCertificate: async function () {

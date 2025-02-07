@@ -23,7 +23,7 @@ const Form = ({ universities }: { universities: any }) => {
             const response = await companyApi.certificateVerify(data);
             if (response.data.success == true) {     
                 toast.success(response.data.message);
-                router.refresh();           
+                router.push(`/company-admin/certificate/${response.data.data.certificateId}`);           
             } else if (response.data.success == false) {
                 toast.error(response.data.message);
             }
