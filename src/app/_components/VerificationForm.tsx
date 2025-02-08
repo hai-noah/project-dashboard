@@ -79,6 +79,9 @@ const Form = ({ universities }: { universities: any }) => {
                                     }}
                                     className={`relative z-5 w-full px-5 appearance-none text-center rounded-[7px] border border-stroke bg-transparent px-11.5 py-3 outline-none transition focus:border-primary active:border-primary dark:border-dark-3 dark:bg-dark-2 ${isOptionSelected ? "text-dark dark:text-white" : ""}`}
                                 >
+                                        <option className="text-dark-5 dark:text-dark-6" hidden>
+                                            Choose--University
+                                        </option>
                                     {universities.map((university: any, index: any) => (
                                         <option value={university._id} className="text-dark-5 dark:text-dark-6" key={index}>
                                             {university.universityName}
