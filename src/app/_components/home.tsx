@@ -47,9 +47,9 @@ const HomePage = () => {
                            className="object-fill"
                            /></div>
                       </span>
-                      <br></br>
+                      
 
-               <span className="h-12 w-[100%]  rounded-full">
+               {/* <span className="h-12 w-[100%]  rounded-full">
                <div className="relative w-full h-[40rem]"> <Image
                           fill
                           src="/images/home/User-03.png"
@@ -60,7 +60,7 @@ const HomePage = () => {
                           alt="User"
                           className="object-fill"
                           /></div>
-                      </span>
+                      </span> */}
                  </div>
           
         </>
